@@ -43,3 +43,9 @@ next-env.d.ts
 steps.md 
 ProductPlan.md
 /src/generated/prisma
+
+
+/.agents/
+/.claude/
+/.windsurf/
+/skills-lock.json
