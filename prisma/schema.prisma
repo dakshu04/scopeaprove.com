@@ -1,0 +1,202 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum ChangeRequestStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  DECLINED
+  EXPIRED
+}
+
+enum ApprovalDecision {
+  APPROVED
+  DECLINED
+}
+
+// ============================================================
+// BETTER AUTH MODELS
+// ============================================================
+
+model User {
+  id            String   @id
+  name          String   @db.VarChar(120)
+  email         String   @unique @db.VarChar(320)
+  emailVerified Boolean  @default(false)
+  image         String?  @db.Text
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+
+  sessions Session[]
+  accounts Account[]
+
+  projects Project[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime @db.Timestamptz(3)
+  token     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  ipAddress String? @db.VarChar(64)
+  userAgent String? @db.Text
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Account {
+  id         String @id
+  accountId  String @db.VarChar(255)
+  providerId String @db.VarChar(100)
+  userId     String
+
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime? @db.Timestamptz(3)
+  refreshTokenExpiresAt DateTime? @db.Timestamptz(3)
+  scope                 String?   @db.Text
+  password              String?   @db.Text
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+}
+
+model Verification {
+  id         String   @id
+  identifier String   @db.VarChar(320)
+  value      String   @db.Text
+  expiresAt  DateTime @db.Timestamptz(3)
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([identifier])
+  @@index([expiresAt])
+}
+
+// ============================================================
+// PROJECT
+// ============================================================
+
+model Project {
+  id          String  @id @default(cuid())
+  userId      String
+  name        String  @db.VarChar(100)
+  description String? @db.VarChar(2000)
+
+  clientName  String? @db.VarChar(120)
+  clientEmail String? @db.VarChar(320)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scopeItems     ScopeItem[]
+  changeRequests ChangeRequest[]
+
+  @@index([userId, updatedAt])
+}
+
+// ============================================================
+// ORIGINAL PROJECT SCOPE
+// ============================================================
+
+model ScopeItem {
+  id          String  @id @default(cuid())
+  projectId   String
+  title       String  @db.VarChar(160)
+  description String? @db.Text
+  position    Int     @default(0)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, position])
+}
+
+// ============================================================
+// CHANGE REQUEST
+// ============================================================
+
+model ChangeRequest {
+  id        String @id @default(cuid())
+  projectId String
+
+  title       String @db.VarChar(160)
+  description String @db.Text
+
+  amountCents Int
+  currency    String @db.Char(3)
+
+  additionalDays  Int?
+  newDeliveryDate DateTime? @db.Timestamptz(3)
+
+  status    ChangeRequestStatus @default(DRAFT)
+  expiresAt DateTime?           @db.Timestamptz(3)
+
+  // The browser receives the original random token.
+  // Only its SHA-256 hash is stored.
+  publicTokenHash String? @unique @db.Char(64)
+
+  sentAt DateTime? @db.Timestamptz(3)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  project  Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  approval Approval?
+
+  @@index([projectId, createdAt])
+  @@index([status, expiresAt])
+}
+
+// ============================================================
+// FINAL APPROVAL RECORD
+// ============================================================
+
+model Approval {
+  id              String @id @default(cuid())
+  changeRequestId String @unique
+
+  decision ApprovalDecision
+
+  clientName  String @db.VarChar(120)
+  clientEmail String @db.VarChar(320)
+
+  declineReason String? @db.VarChar(2000)
+
+  decidedAt DateTime @default(now()) @db.Timestamptz(3)
+  userAgent String?  @db.VarChar(512)
+
+  changeRequest ChangeRequest @relation(fields: [changeRequestId], references: [id], onDelete: Cascade)
+
+  @@index([decision, decidedAt])
+}
