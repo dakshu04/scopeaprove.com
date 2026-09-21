@@ -1,69 +1,99 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight, Check, CheckCircle2, ChevronDown, Clock3, FileCheck2,
+  Handshake, History, Link2, MessageSquareText, ShieldCheck,
+} from "lucide-react";
+import { HeroLiveStatus } from "@/components/marketing/hero-live-status";
+import { HeroMotion } from "@/components/marketing/hero-motion";
+import { SectionReveal } from "@/components/marketing/section-reveal";
+import { SmoothScroll } from "@/components/marketing/smooth-scroll";
+
+const benefits = [
+  [FileCheck2, "Clear change requests", "Define the extra work, price, and delivery impact in language your client can understand."],
+  [Link2, "Approval without friction", "Send one focused review link. Your client can decide without creating an account."],
+  [History, "A reliable decision trail", "Keep the request, response, status, and timestamps together instead of buried in messages."],
+  [Handshake, "A better client experience", "Replace awkward scope conversations with a calm, consistent, professional process."],
+] as const;
+
+const faqs = [
+  ["Does my client need a ScopeAprove account?", "No. Your client receives a private link where they can review and respond without creating an account."],
+  ["Is an approval legally binding?", "ScopeAprove creates a documented record of the request and response. It supports your existing agreement, but does not replace legal advice tailored to your jurisdiction."],
+  ["Can I include both price and timeline changes?", "Yes. Every request can explain the work, additional cost, and delivery impact before your client decides."],
+  ["What if the client does not approve?", "The request stays separate from the agreed scope, giving you a clear record without starting unapproved work."],
+  ["Can I use it for an existing project?", "Yes. Add the current project and its original scope, then manage new requests from that point forward."],
+  ["Can I cancel Pro at any time?", "Yes. Pro is $9 per month with no long-term commitment."],
+] as const;
+
+function Brand() {
+  return <span className="inline-flex items-center gap-2.5 font-semibold tracking-[-0.02em]"><span className="grid size-7 place-items-center rounded-lg bg-[#176b55] text-white"><FileCheck2 className="size-4" /></span>ScopeAprove</span>;
+}
+
+function Editorial({ children }: { children: React.ReactNode }) {
+  return <span className="font-[family-name:var(--font-editorial)] text-[1.12em] font-normal italic tracking-normal text-[#176b55]">{children}</span>;
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#176b55]">{children}</p>;
+}
+
+function RequestPreview() {
+  return (
+    <div className="mx-auto w-full max-w-[570px] rounded-2xl border border-[#deded5] bg-white p-5 shadow-[0_24px_70px_rgba(36,52,46,0.10)] sm:p-7">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#ecece5] pb-4 text-xs">
+        <span className="font-semibold">ScopeAprove <span className="ml-2 font-mono font-normal text-[#77776f]">/ CR-1048</span></span>
+        <span className="rounded-full border border-[#d9c98e] bg-[#fbf7e9] px-2.5 py-1 font-medium text-[#80651a]">Awaiting approval</span>
+      </div>
+      <div className="py-5"><h2 className="text-xl font-semibold tracking-[-0.025em]">Add customer analytics dashboard</h2><p className="mt-2 text-xs leading-5 text-[#77776f]">Client: <b className="text-[#30312d]">Northstar Labs</b> · Project: <b className="text-[#30312d]">Website redesign</b></p></div>
+      <p className="rounded-xl border border-[#ecece5] bg-[#fafaf7] p-4 text-sm leading-6 text-[#555650]">Add an in-app overview for monthly active users, conversion funnels, and retention cohorts before launch.</p>
+      <div className="py-5"><p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#77776f]">Deliverables included</p><ul className="space-y-2.5 text-sm text-[#30312d]">{["Analytics dashboard with date and segment filters", "Event metrics API integration", "Retention cohort view with CSV export"].map((item) => <li className="flex items-start gap-2.5" key={item}><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#176b55]" />{item}</li>)}</ul></div>
+      <div className="grid grid-cols-2 gap-4 rounded-xl border border-[#e4e4dc] bg-[#f7f7f3] p-4"><div><p className="text-xs text-[#77776f]">Additional cost</p><p className="mt-1 text-xl font-semibold">$750</p></div><div><p className="text-xs text-[#77776f]">Timeline impact</p><p className="mt-1 text-xl font-semibold">+5 days</p></div></div>
+      <div className="mt-5 flex flex-col gap-3 border-t border-[#ecece5] pt-5 sm:flex-row sm:items-center sm:justify-between"><HeroLiveStatus /><div className="flex gap-2 text-center text-xs font-semibold"><span className="rounded-lg border border-[#deded5] px-3 py-2">Decline</span><span className="rounded-lg bg-[#176b55] px-4 py-2 text-white">Approve request</span></div></div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="landing-page min-h-screen w-full max-w-full overflow-x-hidden bg-[#f8f8f4] text-[#1b1c18] selection:bg-[#bce8d7]">
+      <SmoothScroll />
+      <HeroMotion />
+      <SectionReveal />
+      <header className="sticky top-0 z-50 border-b border-[#e7e7df]/90 bg-[#f8f8f4]/90 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6"><Link href="/" aria-label="ScopeAprove home"><Brand /></Link><nav className="hidden items-center gap-7 text-sm font-medium text-[#666760] md:flex" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><div className="flex items-center gap-3"><Link className="hidden text-sm font-medium text-[#62635d] sm:block" href="/sign-in">Sign in</Link><Link className="rounded-lg bg-[#176b55] px-4 py-2.5 text-xs font-semibold text-white shadow-sm sm:text-sm" href="/sign-in">Get started free</Link></div></div></header>
+
+      <main>
+        <section className="relative mx-auto max-w-[1180px] px-5 pb-20 pt-14 sm:px-6 sm:pt-20 lg:pb-28 lg:pt-24"><div aria-hidden className="absolute -right-40 top-0 size-[520px] rounded-full bg-[#dceee6]/50 blur-3xl" /><div className="relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]"><div><div className="inline-flex items-center gap-2 rounded-full border border-[#176b55]/15 bg-[#eaf3ef] px-3 py-1.5 text-xs font-semibold text-[#176b55]"><span className="size-1.5 rounded-full bg-[#176b55]" />Scope changes, properly approved.</div><h1 className="mt-6 max-w-[640px] text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[4.25rem]">Stop doing <Editorial>extra work</Editorial> for free.</h1><p className="mt-6 max-w-xl text-base leading-7 text-[#64655f] sm:text-lg sm:leading-8">Turn client requests into clear, documented change approvals—with pricing, timeline impact, and a decision recorded before work begins.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#176b55] px-5 py-3 text-sm font-semibold text-white" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><a className="inline-flex items-center justify-center rounded-lg border border-[#deded5] bg-white px-5 py-3 text-sm font-semibold" href="#how-it-works">See how it works</a></div><p className="mt-4 flex items-center gap-2 text-xs text-[#7a7b74]"><CheckCircle2 className="size-4 text-[#176b55]" />Free to start · No credit card required</p></div><RequestPreview /></div></section>
+
+        <section className="border-y border-[#e4e4dc] bg-white py-20 lg:py-24"><div className="mx-auto max-w-[1180px] px-5 sm:px-6"><div className="max-w-2xl"><h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Small requests become <Editorial>expensive problems.</Editorial></h2><p className="mt-4 leading-7 text-[#666760]">A quick message can quietly add hours of unpaid work. Give every change a clear scope, price, timeline, and decision record.</p></div><div className="mt-12 grid gap-8 md:grid-cols-3">{[["Verbal request", "Documented change", "Capture the requirement before starting extra work."], ["Unclear cost", "Approved price", "Agree on the impact instead of debating the invoice later."], ["Scattered messages", "One decision record", "Keep the request and response together in one place."]].map(([before, after, text]) => <article className="border-l-2 border-[#dadbd3] pl-6" key={before}><p className="text-sm font-semibold"><span className="text-[#999a93] line-through">{before}</span><ArrowRight className="mx-2 inline size-3.5 text-[#176b55]" /><span className="text-[#176b55]">{after}</span></p><p className="mt-3 text-sm leading-6 text-[#6d6e67]">{text}</p></article>)}</div></div></section>
+
+        <section className="mx-auto max-w-[1180px] scroll-mt-24 px-5 py-20 sm:px-6 lg:py-28" id="how-it-works"><div className="max-w-2xl"><Eyebrow>Workflow</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">From client request to approval in <Editorial>minutes.</Editorial></h2><p className="mt-4 leading-7 text-[#666760]">A simple workflow built to protect your margin without making the client relationship feel difficult.</p></div><div className="mt-12 grid gap-4 md:grid-cols-3">{[["01", "Describe the change", "Summarize the work and explain what sits outside the original agreement."], ["02", "Add the impact", "Set the extra price, delivery adjustment, and specific deliverables."], ["03", "Send for approval", "Share one private link so your client can record a decision."]].map(([number, title, text]) => <article className="rounded-2xl border border-[#e1e1d9] bg-white p-6 shadow-[0_6px_24px_rgba(39,54,48,0.04)]" key={number}><span className="font-[family-name:var(--font-editorial)] text-3xl italic text-[#176b55]">{number}</span><h3 className="mt-5 font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-[#696a63]">{text}</p></article>)}</div>
+          <div className="mt-12 grid overflow-hidden rounded-2xl border border-[#deded6] bg-white shadow-[0_20px_60px_rgba(39,54,48,0.07)] lg:grid-cols-[0.84fr_1.16fr]"><div className="border-b border-[#e7e7df] bg-[#f2f3ed] p-7 lg:border-b-0 lg:border-r lg:p-9"><Eyebrow>New change request</Eyebrow><h3 className="mt-3 text-2xl font-semibold tracking-[-0.035em]">Put the whole decision in one place.</h3><p className="mt-3 text-sm leading-6 text-[#666760]">No long email thread. No pricing buried in chat. Just what your client needs.</p><div className="mt-8 space-y-4 text-sm">{["Describe the requested work", "List cost and timing impact", "Send a focused approval link"].map((item, index) => <div className="flex items-center gap-3" key={item}><span className="grid size-7 place-items-center rounded-full border border-[#cfded7] bg-white text-xs font-semibold text-[#176b55]">{index + 1}</span><b>{item}</b></div>)}</div></div><div className="p-6 sm:p-8 lg:p-9"><div className="grid gap-5 sm:grid-cols-2">{[["Project", "Website redesign"], ["Request title", "Analytics dashboard"], ["Additional cost", "$750"], ["Timeline impact", "5 business days"]].map(([label, value]) => <label className="text-xs font-semibold text-[#52534e]" key={label}>{label}<span className="mt-2 block rounded-lg border border-[#dcded6] bg-[#fafaf7] px-3.5 py-3 text-sm font-normal text-[#262722]">{value}</span></label>)}<label className="text-xs font-semibold text-[#52534e] sm:col-span-2">What is changing?<span className="mt-2 block min-h-20 rounded-lg border border-[#dcded6] bg-[#fafaf7] px-3.5 py-3 text-sm font-normal leading-6 text-[#676860]">Add customer reporting views, filters, and export functionality.</span></label></div></div></div>
+        </section>
+
+        <section className="scroll-mt-24 border-y border-[#e4e4dc] bg-white py-20 lg:py-28" id="features">
+          <div className="mx-auto max-w-[1180px] px-5 sm:px-6">
+            <div className="max-w-2xl"><Eyebrow>Built for clear boundaries</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Everything needed to protect the scope.</h2></div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">{benefits.map(([Icon, title, text]) => <article className="flex min-h-60 flex-col justify-between rounded-2xl border border-[#e1e1da] bg-[#fafaf7] p-7" key={title}><div><span className="grid size-10 place-items-center rounded-xl border border-[#e0e1da] bg-white text-[#176b55]"><Icon className="size-5" /></span><h3 className="mt-5 text-lg font-semibold tracking-[-0.025em]">{title}</h3><p className="mt-2 max-w-lg text-sm leading-6 text-[#686961]">{text}</p></div><p className="mt-7 border-t border-[#e4e4dc] pt-4 text-xs font-medium text-[#176b55]">Designed for clear client decisions</p></article>)}</div>
+          </div>
+        </section>
+
+        <section className="mx-auto grid max-w-[1180px] items-center gap-12 px-5 py-20 sm:px-6 lg:grid-cols-2 lg:py-28">
+          <div className="rounded-2xl border border-[#dfe0d8] bg-white p-5 shadow-[0_20px_55px_rgba(29,46,40,0.09)] sm:p-7">
+            <div className="flex items-center justify-between border-b border-[#ecece5] pb-4 text-xs"><b className="flex items-center gap-2"><span className="size-2 rounded-full bg-[#176b55]" />Northstar Labs</b><span className="flex items-center gap-1.5 text-[#82827a]"><ShieldCheck className="size-3.5" />Private link</span></div>
+            <div className="py-5"><p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#77776f]">Change request · CR-1048</p><h3 className="mt-2 text-xl font-semibold tracking-[-0.025em]">Customer analytics dashboard</h3><p className="mt-2 text-sm leading-6 text-[#676760]">Review the added deliverables and their impact before work begins.</p></div>
+            <div className="grid grid-cols-2 gap-3 rounded-xl border border-[#e9e9e2] bg-[#fafaf7] p-4"><div><p className="text-xs text-[#77776f]">Adjusted cost</p><p className="mt-1 text-xl font-semibold">$750</p></div><div><p className="text-xs text-[#77776f]">Delivery shift</p><p className="mt-1 text-xl font-semibold">+5 days</p></div></div>
+            <div className="mt-5 border-t border-[#ecece5] pt-5"><div className="rounded-lg bg-[#176b55] px-4 py-3 text-center text-sm font-semibold text-white">Approve change request</div><p className="mt-3 text-center text-[11px] text-[#888880]">Approval records the decision and stated project impact.</p></div>
+          </div>
+          <div><Eyebrow>Built for your clients too</Eyebrow><h2 className="mt-2 text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl">No account. No complicated portal. Just a <Editorial>clear decision.</Editorial></h2><p className="mt-5 max-w-xl leading-7 text-[#666760]">Clients see what is changing, why it matters, what it costs, and how it affects delivery—on one focused page.</p><div className="mt-8 space-y-5">{[[MessageSquareText, "Clear scope and deliverables", "Specific items make the request easy to understand."], [Clock3, "Cost and timeline shown upfront", "The full project impact is visible before approval."], [ShieldCheck, "A recorded client decision", "The response and timestamp stay with the request."]].map(([Icon, title, text]) => { const ItemIcon = Icon as typeof MessageSquareText; return <div className="flex items-start gap-3" key={title as string}><span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#e7f2ed] text-[#176b55]"><ItemIcon className="size-4" /></span><div><h3 className="text-sm font-semibold">{title as string}</h3><p className="mt-1 text-sm leading-6 text-[#70716a]">{text as string}</p></div></div>; })}</div></div>
+        </section>
+
+        <section className="scroll-mt-24 border-y border-[#e4e4dc] bg-white py-20 lg:py-28" id="pricing"><div className="mx-auto max-w-[920px] px-5 sm:px-6"><div className="mx-auto max-w-2xl text-center"><Eyebrow>Pricing</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Simple pricing for better <Editorial>boundaries.</Editorial></h2><p className="mt-4 text-[#666760]">Start free. Upgrade when ScopeAprove becomes part of your regular client workflow.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2">
+          {[{name: "Free", price: "$0", suffix: "forever", description: "For trying the workflow", features: ["Up to 3 active change requests", "Client approval links", "Cost and timeline impact", "Approval history"], featured: false, cta: "Start for free"}, {name: "Pro", price: "$9", suffix: "per month", description: "For freelancers and small teams", features: ["Unlimited change requests", "Unlimited projects and clients", "Complete approval history", "Priority support"], featured: true, cta: "Start with Pro"}].map((plan) => <article className={`relative flex flex-col rounded-2xl bg-[#fafaf7] p-7 sm:p-8 ${plan.featured ? "border-2 border-[#176b55] shadow-[0_18px_45px_rgba(23,107,85,0.10)]" : "border border-[#deded6]"}`} key={plan.name}>{plan.featured && <span className="absolute -top-3 right-6 rounded-full bg-[#176b55] px-3 py-1 text-[11px] font-semibold text-white">Most popular</span>}<h3 className="text-lg font-semibold">{plan.name}</h3><p className="mt-1 text-sm text-[#6b6c65]">{plan.description}</p><div className="mt-7 flex items-end gap-2"><span className="text-5xl font-semibold tracking-[-0.05em]">{plan.price}</span><span className="pb-1 text-sm text-[#777870]">{plan.suffix}</span></div><ul className="mt-7 flex-1 space-y-3 border-t border-[#dfdfd7] pt-6 text-sm">{plan.features.map((item) => <li className="flex items-center gap-2.5" key={item}><Check className="size-4 text-[#176b55]" />{item}</li>)}</ul><Link className={`mt-8 rounded-lg px-4 py-3 text-center text-sm font-semibold ${plan.featured ? "bg-[#176b55] text-white" : "border border-[#d9d9d1] bg-white"}`} href="/sign-in">{plan.cta}</Link></article>)}</div><p className="mt-7 text-center text-xs text-[#7d7e76]">No credit card required for Free. Cancel Pro anytime.</p></div></section>
+
+        <section className="mx-auto max-w-[820px] scroll-mt-24 px-5 py-20 sm:px-6 lg:py-28" id="faq"><div className="text-center"><Eyebrow>Answers</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Frequently asked questions</h2></div><div className="mt-10 divide-y divide-[#e1e1d9] border-y border-[#e1e1d9]">{faqs.map(([question, answer]) => <details className="group py-5" key={question}><summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-semibold marker:content-none">{question}<ChevronDown className="size-4 shrink-0 text-[#777870] group-open:rotate-180" /></summary><p className="max-w-2xl pt-3 text-sm leading-6 text-[#696a63]">{answer}</p></details>)}</div></section>
+
+        <section className="mx-auto max-w-[1180px] px-5 pb-20 sm:px-6 lg:pb-24"><div className="relative overflow-hidden rounded-3xl bg-[#191b19] px-6 py-16 text-center text-white sm:px-12 sm:py-20"><div aria-hidden className="absolute left-1/2 top-0 h-40 w-3/4 -translate-x-1/2 rounded-full bg-[#176b55]/20 blur-3xl" /><div className="relative"><h2 className="text-3xl font-semibold tracking-[-0.045em] sm:text-5xl">Make the next scope change <span className="font-[family-name:var(--font-editorial)] font-normal italic text-[#a4e7cd]">clear.</span></h2><p className="mx-auto mt-4 max-w-xl leading-7 text-[#a9aaa4]">Document the work, agree on the impact, and get approval before you begin.</p><Link className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#a4e7cd] px-5 py-3 text-sm font-semibold text-[#173b30]" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><p className="mt-4 text-xs text-[#7f817b]">Free to start · No credit card required</p></div></div></section>
       </main>
+      <footer className="border-t border-[#e2e2da] bg-[#f2f2ec]"><div className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6"><div className="flex flex-col justify-between gap-8 sm:flex-row"><div><Brand /><p className="mt-2 text-sm text-[#6e6f68]">Clear scope. Confident approvals.</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#62635d]"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><Link href="/sign-in">Sign in</Link></div></div><div className="mt-9 flex flex-col justify-between gap-3 border-t border-[#deded6] pt-6 text-xs text-[#85867e] sm:flex-row"><p>© {new Date().getFullYear()} ScopeAprove. All rights reserved.</p><p>Built for better client work.</p></div></div></footer>
     </div>
   );
 }
