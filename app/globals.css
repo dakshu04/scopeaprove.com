@@ -100,3 +100,165 @@ body {
     @apply font-sans;
   }
 }
+
+/* Keep intrinsically wide product previews inside narrow marketing viewports. */
+.landing-page main > section:first-child,
+.landing-page main > section:first-child > div,
+.landing-page main > section:first-child > div > div {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.landing-page main > section:first-child {
+  max-width: 1100px;
+  padding-top: 3rem;
+  padding-bottom: 4.5rem;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) {
+  gap: 2.5rem;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:last-child {
+  max-width: 520px;
+}
+
+.landing-page main > section:first-child h1 {
+  max-width: 34rem;
+  font-size: clamp(2.65rem, 5vw, 3.8rem);
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1024px) {
+  .landing-page main > section:first-child {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@keyframes hero-blur-reveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child > * {
+  opacity: 0;
+  animation: hero-blur-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, filter, transform;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child > :nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child > :nth-child(3) {
+  animation-delay: 150ms;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child > :nth-child(4) {
+  animation-delay: 220ms;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child > :nth-child(5) {
+  animation-delay: 290ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page main > section:first-child > div:nth-child(2) > div:first-child > * {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes hero-preview-blur-reveal {
+  from {
+    opacity: 0;
+    filter: blur(28px);
+    transform: translate3d(
+        24px,
+        calc(var(--hero-card-parallax, 0px) + 12px),
+        0
+      )
+      scale(0.975);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, var(--hero-card-parallax, 0px), 0) scale(1);
+  }
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:last-child {
+  position: relative;
+  isolation: isolate;
+  animation: hero-preview-blur-reveal 1200ms 280ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, filter, transform;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:last-child::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--hero-pointer-x, 72%) var(--hero-pointer-y, 30%),
+    rgb(137 213 186 / 16%),
+    transparent 68%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.landing-page main > section:first-child > div:nth-child(2) > div:first-child {
+  transform: translate3d(0, var(--hero-copy-parallax, 0px), 0);
+  will-change: transform;
+}
+
+.landing-reveal-ready [data-section-reveal] > * {
+  opacity: 0;
+  filter: blur(18px);
+  transform: translateY(34px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, filter, transform;
+}
+
+.landing-reveal-ready [data-section-reveal] > :nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.landing-reveal-ready [data-section-reveal] > :nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.landing-reveal-ready [data-section-reveal].is-visible > * {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page main > section:first-child > div:nth-child(2) > div:last-child {
+    animation: none;
+  }
+
+  .landing-reveal-ready [data-section-reveal] > * {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
