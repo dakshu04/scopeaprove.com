@@ -103,7 +103,7 @@ const [declineReason, setDeclineReason] = useState("");
           )}
         >
           <X aria-hidden="true" />
-          Decline request
+          Request changes
         </Button>
       </div>
 
@@ -178,7 +178,7 @@ const [declineReason, setDeclineReason] = useState("");
       {decision === "DECLINED" && (
         <div className="space-y-2">
           <Label htmlFor="declineReason">
-            Reason for declining
+            What needs to change?
           </Label>
 
           <Textarea
@@ -229,7 +229,7 @@ onChange={(event) => setDeclineReason(event.target.value)}
           {pending
             ? "Recording decision…"
             : decision === "DECLINED"
-              ? "Confirm decline"
+              ? "Send change request"
               : "Confirm approval"}
         </Button>
       </div>

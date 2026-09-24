@@ -2,7 +2,6 @@
 
 import {
   useActionState,
-  useEffect,
   useState,
 } from "react";
 import { Check, Copy, Link2 } from "lucide-react";
@@ -33,19 +32,11 @@ export function PublishChangeRequest({
     initialState,
   );
 
-  const [approvalUrl, setApprovalUrl] = useState("");
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!state.approvalPath) {
-      return;
-    }
-
-    setApprovalUrl(
-      `${window.location.origin}${state.approvalPath}`,
-    );
-    setCopied(false);
-  }, [state.approvalPath]);
+  const approvalUrl =
+    state.approvalPath && typeof window !== "undefined"
+      ? `${window.location.origin}${state.approvalPath}`
+      : state.approvalPath ?? "";
 
   async function copyApprovalLink() {
     if (!approvalUrl) {
@@ -61,7 +52,7 @@ export function PublishChangeRequest({
   }
 
   return (
-    <section className="border border-border">
+    <section className="overflow-hidden rounded-xl border border-primary/15 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
       <div className="border-b border-border px-5 py-4">
         <div className="flex items-center gap-2">
           <Link2
@@ -88,7 +79,7 @@ export function PublishChangeRequest({
           </p>
         )}
 
-        <form action={formAction}>
+        <form action={formAction} onSubmit={() => setCopied(false)}>
           <Button type="submit" disabled={pending}>
             {pending
               ? "Creating link…"

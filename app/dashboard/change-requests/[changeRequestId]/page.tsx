@@ -42,8 +42,8 @@ function getStatusPresentation(status: string) {
 
     case "DECLINED":
       return {
-        label: "Declined",
-        className: "border-red-200 bg-red-50 text-red-800",
+        label: "Changes requested",
+        className: "border-orange-200 bg-orange-50 text-orange-800",
       };
 
     case "EXPIRED":
@@ -114,8 +114,8 @@ export default async function ChangeRequestPage({
   const status = getStatusPresentation(changeRequest.status);
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-6">
+    <div className="space-y-6">
+      <header className="space-y-4">
         <Link
           href="/dashboard/change-requests"
           className="text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -125,13 +125,13 @@ export default async function ChangeRequestPage({
 
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-semibold tracking-tight">
+            <h1 className="text-3xl font-semibold tracking-[-0.035em]">
               {changeRequest.title}
             </h1>
 
             <span
               className={cn(
-                "inline-flex border px-2 py-1 text-xs font-medium",
+                "inline-flex rounded-full border px-2.5 py-1 text-xs font-medium",
                 status.className,
               )}
             >
@@ -145,9 +145,9 @@ export default async function ChangeRequestPage({
         </div>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="space-y-6">
-          <section className="border border-border">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <div className="space-y-5">
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
             <div className="border-b border-border px-5 py-4">
               <h2 className="text-sm font-semibold">
                 Requested work
@@ -159,19 +159,12 @@ export default async function ChangeRequestPage({
             </p>
           </section>
 
-          <section className="border border-border">
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
             <div className="border-b border-border px-5 py-4">
               <h2 className="text-sm font-semibold">
                 Schedule impact
               </h2>
             </div>
-              {(changeRequest.status === "DRAFT" ||
-                changeRequest.status === "PENDING") && (
-                <PublishChangeRequest
-                    changeRequestId={changeRequest.id}
-                    status={changeRequest.status}
-                />
-)}
             <dl className="grid gap-6 px-5 py-4 sm:grid-cols-2">
               <div>
                 <dt className="text-xs text-muted-foreground">
@@ -206,7 +199,7 @@ export default async function ChangeRequestPage({
             />
             )}
           {changeRequest.approval && (
-            <section className="border border-border">
+            <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
               <div className="border-b border-border px-5 py-4">
                 <h2 className="text-sm font-semibold">
                   Client decision
@@ -236,7 +229,7 @@ export default async function ChangeRequestPage({
                 {changeRequest.approval.declineReason && (
                   <div>
                     <dt className="text-xs text-muted-foreground">
-                      Reason
+                      Requested changes
                     </dt>
                     <dd className="mt-1 whitespace-pre-wrap">
                       {changeRequest.approval.declineReason}
@@ -248,8 +241,8 @@ export default async function ChangeRequestPage({
           )}
         </div>
 
-        <aside className="space-y-6">
-          <section className="border border-border">
+        <aside className="space-y-5">
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
             <div className="border-b border-border px-4 py-3">
               <h2 className="text-sm font-semibold">
                 Project
@@ -281,7 +274,7 @@ export default async function ChangeRequestPage({
             </div>
           </section>
 
-          <section className="border border-border px-4 py-4">
+          <section className="rounded-xl border border-primary/10 bg-gradient-to-br from-secondary to-card px-4 py-4 shadow-sm">
             <p className="text-xs text-muted-foreground">
               Additional amount
             </p>

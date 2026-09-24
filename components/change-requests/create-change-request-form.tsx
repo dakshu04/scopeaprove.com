@@ -30,7 +30,10 @@ export function CreateChangeRequestForm({
   );
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form
+      action={formAction}
+      className="space-y-6 rounded-2xl border border-border/80 bg-card p-5 shadow-[0_12px_35px_rgba(31,49,42,0.05)] sm:p-6"
+    >
       <div className="space-y-2">
         <Label htmlFor="title">Change title</Label>
 

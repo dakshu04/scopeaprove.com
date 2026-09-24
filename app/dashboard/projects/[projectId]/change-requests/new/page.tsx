@@ -34,7 +34,7 @@ export default async function NewChangeRequestPage({
   }
 
   return (
-    <div className="max-w-2xl space-y-8">
+    <div className="max-w-3xl space-y-6">
       <header>
         <Link
           href={`/dashboard/projects/${project.id}`}
@@ -47,7 +47,7 @@ export default async function NewChangeRequestPage({
           {project.name}
         </p>
 
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight">
+        <h1 className="mt-2 text-3xl font-semibold tracking-[-0.035em]">
           New change request
         </h1>
 
@@ -57,7 +57,7 @@ export default async function NewChangeRequestPage({
         </p>
       </header>
 
-      <div className="border border-border px-4 py-3">
+      <div className="rounded-xl border border-primary/10 bg-secondary/70 px-4 py-3">
         <p className="text-xs text-muted-foreground">
           Client
         </p>

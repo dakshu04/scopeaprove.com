@@ -11,7 +11,11 @@ type ScopeItemField = {
   id: number;
 };
 
-export function ScopeItemsField() {
+export function ScopeItemsField({
+  compact = false,
+}: {
+  compact?: boolean;
+}) {
   const nextId = useRef(2);
   const [items, setItems] = useState<ScopeItemField[]>([{ id: 1 }]);
 
@@ -29,15 +33,15 @@ export function ScopeItemsField() {
   }
 
   return (
-    <section className="space-y-4 border-t border-border pt-6">
+    <section className={compact ? "space-y-3 border-t border-border pt-4" : "space-y-4 border-t border-border pt-6"}>
       <div>
         <h2 className="text-sm font-semibold">Initial scope</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-xs text-muted-foreground">
           List the work included in the original project agreement.
         </p>
       </div>
 
-      <div className="space-y-3">
+      <div className={compact ? "space-y-2" : "space-y-3"}>
         {items.map((item, index) => {
           const inputId = `scope-item-${item.id}`;
 
@@ -47,7 +51,7 @@ export function ScopeItemsField() {
               className="flex items-end gap-2"
             >
               <div className="min-w-0 flex-1 space-y-2">
-                <Label htmlFor={inputId}>
+                <Label htmlFor={inputId} className={compact ? "text-xs" : undefined}>
                   Scope item {index + 1}
                 </Label>
 
@@ -58,7 +62,7 @@ export function ScopeItemsField() {
                   maxLength={160}
                   placeholder={
                     index === 0
-                      ? "Design and build the homepage"
+                      ? "e.g. Design and build the homepage"
                       : "Add another agreed deliverable"
                   }
                 />

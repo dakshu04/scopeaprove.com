@@ -35,7 +35,7 @@ export const approvalDecisionSchema = z
       context.addIssue({
         code: "custom",
         path: ["declineReason"],
-        message: "Explain why you are declining this request.",
+        message: "Explain what needs to change before approval.",
       });
     }
   });

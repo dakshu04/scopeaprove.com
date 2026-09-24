@@ -40,6 +40,21 @@ export default async function ProjectPage({
           position: true,
         },
       },
+      changeRequests: {
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          status: true,
+          createdAt: true,
+          approval: {
+            select: {
+              clientName: true,
+              declineReason: true,
+            },
+          },
+        },
+      },
       _count: {
         select: {
           changeRequests: true,
@@ -57,8 +72,8 @@ export default async function ProjectPage({
   }).format(project.updatedAt);
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-6">
+    <div className="space-y-6">
+      <header className="space-y-4">
         <Link
           href="/dashboard"
           className="text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -68,7 +83,7 @@ export default async function ProjectPage({
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight">
+            <h1 className="text-3xl font-semibold tracking-[-0.035em]">
               {project.name}
             </h1>
 
@@ -86,9 +101,9 @@ export default async function ProjectPage({
         </div>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="space-y-6">
-          <section className="border border-border">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <div className="space-y-5">
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
             <div className="border-b border-border px-5 py-4">
               <h2 className="text-sm font-semibold">
                 Original project scope
@@ -126,7 +141,7 @@ export default async function ProjectPage({
           </section>
 
           {project.description && (
-            <section className="border border-border px-5 py-4">
+            <section className="rounded-xl border border-border/80 bg-card px-5 py-4 shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
               <h2 className="text-sm font-semibold">
                 Project description
               </h2>
@@ -136,10 +151,74 @@ export default async function ProjectPage({
               </p>
             </section>
           )}
+
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
+            <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
+              <div>
+                <h2 className="text-sm font-semibold">Change requests</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  All requests and client responses for this project.
+                </p>
+              </div>
+              <Link
+                href={`/dashboard/projects/${project.id}/change-requests/new`}
+                className={buttonVariants({ variant: "outline", size: "sm" })}
+              >
+                New request
+              </Link>
+            </div>
+
+            {project.changeRequests.length === 0 ? (
+              <p className="px-5 py-8 text-center text-sm text-muted-foreground">
+                No change requests for this project yet.
+              </p>
+            ) : (
+              <div className="divide-y divide-border">
+                {project.changeRequests.map((request) => (
+                  <Link
+                    key={request.id}
+                    href={`/dashboard/change-requests/${request.id}`}
+                    className="block px-5 py-4 transition-colors hover:bg-muted/50"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-sm font-medium">{request.title}</h3>
+                      <span className={request.status === "APPROVED"
+                        ? "rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800"
+                        : request.status === "DECLINED"
+                          ? "rounded-full border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs font-medium text-orange-800"
+                          : request.status === "PENDING"
+                            ? "rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800"
+                            : "rounded-full border border-border bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground"}
+                      >
+                        {request.status === "DECLINED"
+                          ? "Changes requested"
+                          : request.status.charAt(0) + request.status.slice(1).toLowerCase()}
+                      </span>
+                    </div>
+                    {request.approval?.declineReason ? (
+                      <p className="mt-2 line-clamp-2 text-sm text-orange-800">
+                        Client note: {request.approval.declineReason}
+                      </p>
+                    ) : request.approval ? (
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        Approved by {request.approval.clientName}
+                      </p>
+                    ) : (
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        Created {request.createdAt.toLocaleDateString("en-US", {
+                          month: "short", day: "numeric", year: "numeric",
+                        })}
+                      </p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </section>
         </div>
 
-        <aside className="space-y-6">
-          <section className="border border-border">
+        <aside className="space-y-5">
+          <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
             <div className="border-b border-border px-4 py-3">
               <h2 className="text-sm font-semibold">
                 Client
@@ -176,7 +255,7 @@ export default async function ProjectPage({
             </dl>
           </section>
 
-          <section className="border border-border px-4 py-4">
+          <section className="rounded-xl border border-primary/10 bg-gradient-to-br from-secondary to-card px-4 py-4 shadow-sm">
             <p className="text-xs text-muted-foreground">
               Change requests
             </p>

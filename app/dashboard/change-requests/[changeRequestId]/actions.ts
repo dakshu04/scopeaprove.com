@@ -19,6 +19,7 @@ export async function publishChangeRequest(
   changeRequestId: string,
   _previousState: PublishChangeRequestState,
 ): Promise<PublishChangeRequestState> {
+  void _previousState;
   const user = await requireUser();
 
   const token = generatePublicToken();

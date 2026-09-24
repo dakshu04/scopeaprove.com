@@ -4,7 +4,7 @@ import { CreateProjectForm } from "@/components/projects/create-project-form";
 
 export default function NewProjectPage() {
   return (
-    <div className="max-w-2xl space-y-8">
+    <div className="max-w-3xl space-y-6">
       <header>
         <Link
           href="/dashboard"
@@ -13,7 +13,10 @@ export default function NewProjectPage() {
           ← Back to dashboard
         </Link>
 
-        <h1 className="mt-6 text-2xl font-semibold tracking-tight">
+        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+          Project setup
+        </p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-[-0.035em]">
           Create project
         </h1>
 

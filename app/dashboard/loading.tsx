@@ -1,16 +1,16 @@
 export default function DashboardLoading() {
   return (
     <div
-      className="space-y-8 animate-pulse"
+      className="space-y-6 animate-pulse"
       aria-busy="true"
       aria-label="Loading dashboard content"
     >
       <div className="space-y-3">
-        <div className="h-7 w-56 bg-muted" />
-        <div className="h-4 w-80 max-w-full bg-muted" />
+        <div className="h-7 w-56 rounded-lg bg-muted" />
+        <div className="h-4 w-80 max-w-full rounded bg-muted" />
       </div>
 
-      <div className="grid border border-border sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid overflow-hidden rounded-2xl border border-border bg-card shadow-sm sm:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
@@ -33,7 +33,7 @@ export default function DashboardLoading() {
           <div className="h-9 w-28 bg-muted" />
         </div>
 
-        <div className="border border-border">
+        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}

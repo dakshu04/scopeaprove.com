@@ -77,5 +77,5 @@ export async function createProject(
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/projects");
 
-  redirect(`/dashboard/projects/${project.id}`);
+  redirect(`/dashboard/projects?created=${project.id}`);
 }

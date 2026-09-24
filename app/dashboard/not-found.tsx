@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 export default function DashboardNotFound() {
   return (
-    <section className="border border-border px-6 py-16 text-center">
+    <section className="rounded-2xl border border-border/80 bg-card px-6 py-16 text-center shadow-sm">
       <FileQuestion
         className="mx-auto size-6 text-muted-foreground"
         aria-hidden="true"

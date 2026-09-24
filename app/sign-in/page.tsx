@@ -1,4 +1,5 @@
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
@@ -7,7 +8,7 @@ export default function SignInPage() {
       <header className="border-b border-[#e5e5df] bg-[#f8f8f5]">
         <div className="mx-auto flex h-[78px] max-w-[1200px] items-center justify-between px-6">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-5 w-5 items-center justify-center bg-[#176f5c] text-white">
               <svg
                 width="18"
@@ -24,16 +25,16 @@ export default function SignInPage() {
             </div>
 
             <span className="text-[15px] font-semibold tracking-[-0.02em]">
-              ScopeAprove
+              ScopeYes
             </span>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/"
             className="text-[14px] font-medium text-[#666963] transition-colors hover:text-[#176f5c]"
           >
             Back to home
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -87,19 +88,19 @@ export default function SignInPage() {
           {/* Footer copy */}
           <p className="mt-7 text-center text-[12px] leading-5 text-[#8a8d87]">
             By continuing, you agree to our{" "}
-            <a
+            <Link
               href="/terms"
               className="text-[#666963] underline underline-offset-4 hover:text-[#176f5c]"
             >
               Terms
-            </a>{" "}
+            </Link>{" "}
             and{" "}
-            <a
+            <Link
               href="/privacy"
               className="text-[#666963] underline underline-offset-4 hover:text-[#176f5c]"
             >
               Privacy Policy
-            </a>
+            </Link>
             .
           </p>
         </div>

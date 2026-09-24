@@ -22,7 +22,7 @@ export default function DashboardError({
 
   return (
     <section
-      className="border border-border px-6 py-16 text-center"
+      className="rounded-2xl border border-border/80 bg-card px-6 py-16 text-center shadow-sm"
       role="alert"
     >
       <AlertTriangle

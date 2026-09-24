@@ -8,6 +8,7 @@ import {
   FolderKanban,
   LayoutDashboard,
   Menu,
+  Settings,
 } from "lucide-react";
 
 import {
@@ -36,6 +37,11 @@ const navigation = [
     href: "/dashboard/change-requests",
     icon: FilePenLine,
   },
+  {
+    label: "Settings",
+    href: "/dashboard/settings",
+    icon: Settings,
+  },
 ];
 
 export function DashboardMobileNav() {
@@ -45,7 +51,7 @@ export function DashboardMobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        className="flex size-9 items-center justify-center border border-border outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+        className="flex size-9 items-center justify-center rounded-lg border border-border bg-white shadow-xs outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring md:hidden"
         aria-label="Open navigation"
       >
         <Menu className="size-4" aria-hidden="true" />
@@ -53,10 +59,11 @@ export function DashboardMobileNav() {
 
       <SheetContent
         side="left"
-        className="w-72 gap-0 p-0 shadow-sm"
+        className="w-72 gap-0 bg-sidebar p-0 shadow-xl"
       >
-        <SheetHeader className="flex h-14 justify-center border-b border-border px-5 py-0">
-          <SheetTitle className="text-left text-sm font-semibold tracking-tight">
+        <SheetHeader className="flex h-16 justify-center border-b border-sidebar-border px-5 py-0">
+          <SheetTitle className="flex items-center gap-3 text-left text-sm font-semibold tracking-tight">
+            <span className="grid size-8 place-items-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">S</span>
             ScopeYes
           </SheetTitle>
 
@@ -66,7 +73,7 @@ export function DashboardMobileNav() {
         </SheetHeader>
 
         <nav
-          className="flex flex-col gap-1 px-3 py-4"
+          className="flex flex-col gap-1.5 px-3 py-5"
           aria-label="Mobile dashboard navigation"
         >
           {navigation.map((item) => {
@@ -84,10 +91,10 @@ export function DashboardMobileNav() {
                 onClick={() => setOpen(false)}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "flex items-center gap-2 border-l-2 px-3 py-2 text-sm transition-colors",
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all",
                   isActive
-                    ? "border-foreground bg-muted font-medium text-foreground"
-                    : "border-transparent text-muted-foreground hover:bg-muted/60 hover:text-foreground",
+                    ? "bg-sidebar-accent font-semibold text-sidebar-accent-foreground"
+                    : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
                 )}
               >
                 <Icon className="size-4" aria-hidden="true" />

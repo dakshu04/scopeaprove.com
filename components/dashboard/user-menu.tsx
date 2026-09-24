@@ -54,10 +54,10 @@ export function UserMenu({ name, email }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className="flex items-center gap-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex items-center gap-3 rounded-xl px-2 py-1.5 text-left outline-none transition-colors hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring"
         aria-label="Open account menu"
       >
-        <span className="flex size-8 items-center justify-center border border-border bg-muted text-xs font-semibold">
+        <span className="flex size-8 items-center justify-center rounded-lg border border-primary/15 bg-secondary text-xs font-semibold text-primary">
           {initials}
         </span>
 
@@ -78,7 +78,7 @@ export function UserMenu({ name, email }: UserMenuProps) {
 
       <DropdownMenuContent
         align="end"
-        className="w-64 rounded-sm shadow-sm"
+        className="w-64 rounded-xl border-border/80 p-1.5 shadow-xl"
       >
         <DropdownMenuGroup>
   <DropdownMenuLabel className="py-2">
