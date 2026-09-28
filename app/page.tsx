@@ -8,6 +8,8 @@ import { HeroMotion } from "@/components/marketing/hero-motion";
 import { SectionReveal } from "@/components/marketing/section-reveal";
 import { SmoothScroll } from "@/components/marketing/smooth-scroll";
 
+import { ProCheckoutButton } from "@/components/billing/pro-checkout-button";
+
 const benefits = [
   [FileCheck2, "Clear change requests", "Define the extra work, price, and delivery impact in language your client can understand."],
   [Link2, "Approval without friction", "Send one focused review link. Your client can decide without creating an account."],
@@ -21,7 +23,7 @@ const faqs = [
   ["Can I include both price and timeline changes?", "Yes. Every request can explain the work, additional cost, and delivery impact before your client decides."],
   ["What if the client does not approve?", "The request stays separate from the agreed scope, giving you a clear record without starting unapproved work."],
   ["Can I use it for an existing project?", "Yes. Add the current project and its original scope, then manage new requests from that point forward."],
-  ["Can I cancel Pro at any time?", "Yes. Pro is $9 per month with no long-term commitment."],
+  ["Can I cancel Pro at any time?", "Yes. Pro is $8.99 per month with no long-term commitment."],
 ] as const;
 
 function Brand() {
@@ -86,8 +88,114 @@ export default function Home() {
           <div><Eyebrow>Built for your clients too</Eyebrow><h2 className="mt-2 text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl">No account. No complicated portal. Just a <Editorial>clear decision.</Editorial></h2><p className="mt-5 max-w-xl leading-7 text-[#666760]">Clients see what is changing, why it matters, what it costs, and how it affects delivery—on one focused page.</p><div className="mt-8 space-y-5">{[[MessageSquareText, "Clear scope and deliverables", "Specific items make the request easy to understand."], [Clock3, "Cost and timeline shown upfront", "The full project impact is visible before approval."], [ShieldCheck, "A recorded client decision", "The response and timestamp stay with the request."]].map(([Icon, title, text]) => { const ItemIcon = Icon as typeof MessageSquareText; return <div className="flex items-start gap-3" key={title as string}><span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#e7f2ed] text-[#176b55]"><ItemIcon className="size-4" /></span><div><h3 className="text-sm font-semibold">{title as string}</h3><p className="mt-1 text-sm leading-6 text-[#70716a]">{text as string}</p></div></div>; })}</div></div>
         </section>
 
-        <section className="scroll-mt-24 border-y border-[#e4e4dc] bg-white py-20 lg:py-28" id="pricing"><div className="mx-auto max-w-[920px] px-5 sm:px-6"><div className="mx-auto max-w-2xl text-center"><Eyebrow>Pricing</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Simple pricing for better <Editorial>boundaries.</Editorial></h2><p className="mt-4 text-[#666760]">Start free. Upgrade when ScopeAprove becomes part of your regular client workflow.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2">
-          {[{name: "Free", price: "$0", suffix: "forever", description: "For trying the workflow", features: ["Up to 3 active change requests", "Client approval links", "Cost and timeline impact", "Approval history"], featured: false, cta: "Start for free"}, {name: "Pro", price: "$9", suffix: "per month", description: "For freelancers and small teams", features: ["Unlimited change requests", "Unlimited projects and clients", "Complete approval history", "Priority support"], featured: true, cta: "Start with Pro"}].map((plan) => <article className={`relative flex flex-col rounded-2xl bg-[#fafaf7] p-7 sm:p-8 ${plan.featured ? "border-2 border-[#176b55] shadow-[0_18px_45px_rgba(23,107,85,0.10)]" : "border border-[#deded6]"}`} key={plan.name}>{plan.featured && <span className="absolute -top-3 right-6 rounded-full bg-[#176b55] px-3 py-1 text-[11px] font-semibold text-white">Most popular</span>}<h3 className="text-lg font-semibold">{plan.name}</h3><p className="mt-1 text-sm text-[#6b6c65]">{plan.description}</p><div className="mt-7 flex items-end gap-2"><span className="text-5xl font-semibold tracking-[-0.05em]">{plan.price}</span><span className="pb-1 text-sm text-[#777870]">{plan.suffix}</span></div><ul className="mt-7 flex-1 space-y-3 border-t border-[#dfdfd7] pt-6 text-sm">{plan.features.map((item) => <li className="flex items-center gap-2.5" key={item}><Check className="size-4 text-[#176b55]" />{item}</li>)}</ul><Link className={`mt-8 rounded-lg px-4 py-3 text-center text-sm font-semibold ${plan.featured ? "bg-[#176b55] text-white" : "border border-[#d9d9d1] bg-white"}`} href="/sign-in">{plan.cta}</Link></article>)}</div><p className="mt-7 text-center text-xs text-[#7d7e76]">No credit card required for Free. Cancel Pro anytime.</p></div></section>
+        <section
+          className="scroll-mt-24 border-y border-[#e4e4dc] bg-white py-20 lg:py-28"
+          id="pricing"
+        >
+          <div className="mx-auto max-w-[920px] px-5 sm:px-6">
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow>Pricing</Eyebrow>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
+                Simple pricing for better <Editorial>boundaries.</Editorial>
+              </h2>
+
+              <p className="mt-4 text-[#666760]">
+                Start free. Upgrade when ScopeAprove becomes part of your regular
+                client workflow.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  name: "Free",
+                  price: "$0",
+                  suffix: "forever",
+                  description: "For trying the workflow",
+                  features: [
+                    "1 project",
+                    "Up to 3 active change requests",
+                    "Client approval links",
+                    "Cost and timeline impact",
+                    "Approval history",
+                  ],
+                  featured: false,
+                  cta: "Start for free",
+                },
+                {
+                  name: "Pro",
+                  price: "$8.99",
+                  suffix: "per month",
+                  description: "For freelancers and small teams",
+                  features: [
+                    "Unlimited change requests",
+                    "Unlimited projects and clients",
+                    "Complete approval history",
+                    "Priority support",
+                  ],
+                  featured: true,
+                  cta: "Start with Pro",
+                },
+              ].map((plan) => (
+                <article
+                  className={`relative flex flex-col rounded-2xl bg-[#fafaf7] p-7 sm:p-8 ${
+                    plan.featured
+                      ? "border-2 border-[#176b55] shadow-[0_18px_45px_rgba(23,107,85,0.10)]"
+                      : "border border-[#deded6]"
+                  }`}
+                  key={plan.name}
+                >
+                  {plan.featured ? (
+                    <span className="absolute -top-3 right-6 rounded-full bg-[#176b55] px-3 py-1 text-[11px] font-semibold text-white">
+                      Most popular
+                    </span>
+                  ) : null}
+
+                  <h3 className="text-lg font-semibold">{plan.name}</h3>
+
+                  <p className="mt-1 text-sm text-[#6b6c65]">
+                    {plan.description}
+                  </p>
+
+                  <div className="mt-7 flex items-end gap-2">
+                    <span className="text-5xl font-semibold tracking-[-0.05em]">
+                      {plan.price}
+                    </span>
+
+                    <span className="pb-1 text-sm text-[#777870]">
+                      {plan.suffix}
+                    </span>
+                  </div>
+
+                  <ul className="mt-7 flex-1 space-y-3 border-t border-[#dfdfd7] pt-6 text-sm">
+                    {plan.features.map((item) => (
+                      <li className="flex items-center gap-2.5" key={item}>
+                        <Check className="size-4 text-[#176b55]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {plan.featured ? (
+                    <ProCheckoutButton />
+                  ) : (
+                    <Link
+                      className="mt-8 rounded-lg border border-[#d9d9d1] bg-white px-4 py-3 text-center text-sm font-semibold"
+                      href="/sign-in"
+                    >
+                      {plan.cta}
+                    </Link>
+                  )}
+                </article>
+              ))}
+            </div>
+
+            <p className="mt-7 text-center text-xs text-[#7d7e76]">
+              No credit card required for Free. Cancel Pro anytime.
+            </p>
+          </div>
+        </section>
 
         <section className="mx-auto max-w-[820px] scroll-mt-24 px-5 py-20 sm:px-6 lg:py-28" id="faq"><div className="text-center"><Eyebrow>Answers</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Frequently asked questions</h2></div><div className="mt-10 divide-y divide-[#e1e1d9] border-y border-[#e1e1d9]">{faqs.map(([question, answer]) => <details className="group py-5" key={question}><summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-semibold marker:content-none">{question}<ChevronDown className="size-4 shrink-0 text-[#777870] group-open:rotate-180" /></summary><p className="max-w-2xl pt-3 text-sm leading-6 text-[#696a63]">{answer}</p></details>)}</div></section>
 

@@ -3,6 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import {
+  ACTIVE_CHANGE_REQUEST_STATUSES,
+  FREE_ACTIVE_CHANGE_REQUEST_LIMIT,
+  getBillingEntitlements,
+} from "@/lib/billing";
 import { requireUser } from "@/lib/auth-session";
 import { prisma } from "@/lib/prisma";
 import { createChangeRequestSchema } from "@/lib/validations/change-request";
@@ -67,23 +72,53 @@ export async function createChangeRequest(
     newDeliveryDate,
   } = validatedFields.data;
 
-  let changeRequest: { id: string };
+  let changeRequest: { id: string } | null;
 
   try {
-    changeRequest = await prisma.changeRequest.create({
-      data: {
-        projectId: project.id,
-        title,
-        description,
-        amountCents: amount,
-        currency,
-        additionalDays,
-        newDeliveryDate,
+    const entitlements = await getBillingEntitlements(user.id);
+
+    changeRequest = await prisma.$transaction(
+      async (transaction) => {
+        if (!entitlements.isPro) {
+          const activeChangeRequestCount =
+            await transaction.changeRequest.count({
+              where: {
+                project: {
+                  userId: user.id,
+                },
+                status: {
+                  in: [...ACTIVE_CHANGE_REQUEST_STATUSES],
+                },
+              },
+            });
+
+          if (
+            activeChangeRequestCount >=
+            FREE_ACTIVE_CHANGE_REQUEST_LIMIT
+          ) {
+            return null;
+          }
+        }
+
+        return transaction.changeRequest.create({
+          data: {
+            projectId: project.id,
+            title,
+            description,
+            amountCents: amount,
+            currency,
+            additionalDays,
+            newDeliveryDate,
+          },
+          select: {
+            id: true,
+          },
+        });
       },
-      select: {
-        id: true,
+      {
+        isolationLevel: "Serializable",
       },
-    });
+    );
   } catch {
     return {
       message:
@@ -91,11 +126,16 @@ export async function createChangeRequest(
     };
   }
 
+  if (!changeRequest) {
+    return {
+      message:
+        "The Free plan allows 3 active change requests. Complete an existing request or upgrade to Pro for unlimited requests.",
+    };
+  }
+
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/change-requests");
   revalidatePath(`/dashboard/projects/${project.id}`);
 
-  redirect(
-    `/dashboard/change-requests/${changeRequest.id}`,
-  );
+  redirect(`/dashboard/change-requests/${changeRequest.id}`);
 }

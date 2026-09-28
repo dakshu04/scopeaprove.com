@@ -16,6 +16,15 @@ datasource db {
 // ENUMS
 // ============================================================
 
+enum SubscriptionStatus {
+  PENDING
+  ACTIVE
+  ON_HOLD
+  CANCELLED
+  FAILED
+  EXPIRED
+}
+
 enum ChangeRequestStatus {
   DRAFT
   PENDING
@@ -34,18 +43,53 @@ enum ApprovalDecision {
 // ============================================================
 
 model User {
-  id            String   @id
-  name          String   @db.VarChar(120)
-  email         String   @unique @db.VarChar(320)
-  emailVerified Boolean  @default(false)
-  image         String?  @db.Text
-  createdAt     DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+  id            String  @id
+  name          String  @db.VarChar(120)
+  email         String  @unique @db.VarChar(320)
+  emailVerified Boolean @default(false)
+  image         String? @db.Text
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
   sessions Session[]
   accounts Account[]
 
-  projects Project[]
+  projects     Project[]
+  subscription Subscription?
+}
+
+model Subscription {
+  id String @id @default(cuid())
+
+  userId String @unique
+
+  dodoCustomerId     String? @unique @db.VarChar(255)
+  dodoSubscriptionId String? @unique @db.VarChar(255)
+  dodoProductId      String? @db.VarChar(255)
+
+  status          SubscriptionStatus @default(PENDING)
+  nextBillingDate DateTime?          @db.Timestamptz(3)
+  cancelledAt     DateTime?          @db.Timestamptz(3)
+  lastDodoEventAt DateTime?          @db.Timestamptz(3)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([dodoProductId])
+}
+
+model WebhookEvent {
+  id String @id @default(cuid())
+
+  dodoEventId String   @unique @db.VarChar(255)
+  eventType   String   @db.VarChar(100)
+  processedAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([eventType, processedAt])
 }
 
 model Session {
