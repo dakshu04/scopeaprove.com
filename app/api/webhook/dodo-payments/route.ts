@@ -39,6 +39,36 @@ function mapSubscriptionStatus(status: unknown) {
   }
 }
 
+function isRetryableTransactionError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: unknown }).code === "P2034"
+  );
+}
+
+async function retrySerializableTransaction(
+  operation: () => Promise<void>,
+) {
+  const maximumAttempts = 3;
+
+  for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
+    try {
+      await operation();
+      return;
+    } catch (error) {
+      const canRetry =
+        isRetryableTransactionError(error) &&
+        attempt < maximumAttempts;
+
+      if (!canRetry) {
+        throw error;
+      }
+    }
+  }
+}
+
 export const POST = Webhooks({
   webhookKey,
 
@@ -48,6 +78,8 @@ export const POST = Webhooks({
       case "subscription.renewed":
       case "subscription.updated":
       case "subscription.on_hold":
+      case "subscription.paused":
+      case "subscription.unpaused":
       case "subscription.cancelled":
       case "subscription.failed":
       case "subscription.expired": {
@@ -75,81 +107,83 @@ export const POST = Webhooks({
 
         const status = mapSubscriptionStatus(subscription.status);
 
-        await prisma.$transaction(
-          async (transaction) => {
-            const insertedEvent =
-              await transaction.webhookEvent.createMany({
-                data: [
-                  {
-                    dodoEventId: eventId,
-                    eventType: payload.type,
+        await retrySerializableTransaction(() =>
+          prisma.$transaction(
+            async (transaction) => {
+              const insertedEvent =
+                await transaction.webhookEvent.createMany({
+                  data: [
+                    {
+                      dodoEventId: eventId,
+                      eventType: payload.type,
+                    },
+                  ],
+                  skipDuplicates: true,
+                });
+
+              if (insertedEvent.count === 0) {
+                return;
+              }
+
+              const existingSubscription =
+                await transaction.subscription.findUnique({
+                  where: {
+                    userId,
                   },
-                ],
-                skipDuplicates: true,
-              });
+                  select: {
+                    lastDodoEventAt: true,
+                    updatedAt: true,
+                  },
+                });
 
-            if (insertedEvent.count === 0) {
-              return;
-            }
+              const latestKnownEventAt =
+                existingSubscription?.lastDodoEventAt ??
+                existingSubscription?.updatedAt;
 
-            const existingSubscription =
-              await transaction.subscription.findUnique({
+              if (
+                latestKnownEventAt &&
+                eventTimestamp < latestKnownEventAt
+              ) {
+                return;
+              }
+
+              await transaction.subscription.upsert({
                 where: {
                   userId,
                 },
-                select: {
-                  lastDodoEventAt: true,
-                  updatedAt: true,
+                create: {
+                  userId,
+                  dodoCustomerId:
+                    subscription.customer.customer_id,
+                  dodoSubscriptionId:
+                    subscription.subscription_id,
+                  dodoProductId: subscription.product_id,
+                  status,
+                  nextBillingDate:
+                    subscription.next_billing_date,
+                  cancelledAt:
+                    subscription.cancelled_at ?? null,
+                  lastDodoEventAt: eventTimestamp,
+                },
+                update: {
+                  dodoCustomerId:
+                    subscription.customer.customer_id,
+                  dodoSubscriptionId:
+                    subscription.subscription_id,
+                  dodoProductId: subscription.product_id,
+                  status,
+                  nextBillingDate:
+                    subscription.next_billing_date,
+                  cancelledAt:
+                    subscription.cancelled_at ?? null,
+                  lastDodoEventAt: eventTimestamp,
                 },
               });
-
-            const latestKnownEventAt =
-              existingSubscription?.lastDodoEventAt ??
-              existingSubscription?.updatedAt;
-
-            if (
-              latestKnownEventAt &&
-              eventTimestamp < latestKnownEventAt
-            ) {
-              return;
-            }
-
-            await transaction.subscription.upsert({
-              where: {
-                userId,
-              },
-              create: {
-                userId,
-                dodoCustomerId:
-                  subscription.customer.customer_id,
-                dodoSubscriptionId:
-                  subscription.subscription_id,
-                dodoProductId: subscription.product_id,
-                status,
-                nextBillingDate:
-                  subscription.next_billing_date,
-                cancelledAt:
-                  subscription.cancelled_at ?? null,
-                lastDodoEventAt: eventTimestamp,
-              },
-              update: {
-                dodoCustomerId:
-                  subscription.customer.customer_id,
-                dodoSubscriptionId:
-                  subscription.subscription_id,
-                dodoProductId: subscription.product_id,
-                status,
-                nextBillingDate:
-                  subscription.next_billing_date,
-                cancelledAt:
-                  subscription.cancelled_at ?? null,
-                lastDodoEventAt: eventTimestamp,
-              },
-            });
-          },
-          {
-            isolationLevel: "Serializable",
-          },
+            },
+            {
+              isolationLevel: "Serializable",
+            },
+          ),
         );
 
         return;
