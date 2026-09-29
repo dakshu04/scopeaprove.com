@@ -130,10 +130,10 @@ export function LegalPageShell({
                 Sign in
               </Link>
               <Link className="hover:text-[#176b55]" href="/privacy">
-                Privacy
+                Privacy Policy
               </Link>
               <Link className="hover:text-[#176b55]" href="/terms">
-                Terms
+                Terms of Service
               </Link>
             </nav>
           </div>
