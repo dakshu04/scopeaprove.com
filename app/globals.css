@@ -278,3 +278,109 @@ body {
     transition: none;
   }
 }
+
+/* Long-form legal pages */
+.legal-copy {
+  color: #555650;
+  font-size: 0.975rem;
+  line-height: 1.8;
+}
+
+.legal-copy > section { scroll-margin-top: 2rem; }
+.legal-copy > section + section {
+  margin-top: 3.5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid #e3e3dc;
+}
+.legal-copy h2 {
+  color: #1b1c18;
+  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+.legal-copy h3 {
+  margin-top: 2rem;
+  color: #272823;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.5;
+}
+.legal-copy p,
+.legal-copy ul,
+.legal-copy ol { margin-top: 1rem; }
+.legal-copy ul,
+.legal-copy ol { padding-left: 1.25rem; }
+.legal-copy ul { list-style: disc; }
+.legal-copy ol { list-style: decimal; }
+.legal-copy li { padding-left: 0.35rem; }
+.legal-copy li + li { margin-top: 0.65rem; }
+.legal-copy strong {
+  color: #30312d;
+  font-weight: 650;
+}
+.legal-copy a {
+  color: #176b55;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(23 107 85 / 35%);
+  text-underline-offset: 0.2em;
+}
+.legal-copy a:hover { text-decoration-color: currentColor; }
+.legal-copy a:focus-visible {
+  border-radius: 0.2rem;
+  outline: 2px solid #176b55;
+  outline-offset: 3px;
+}
+.legal-copy .answer {
+  margin-top: 1rem;
+  border-left: 2px solid #176b55;
+  padding-left: 1rem;
+  color: #353630;
+  font-size: 1.025rem;
+  font-weight: 500;
+  line-height: 1.75;
+}
+.legal-copy .faq-list {
+  margin-top: 1.5rem;
+  border-top: 1px solid #e3e3dc;
+}
+.legal-copy .faq-list > div {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e3e3dc;
+}
+.legal-copy .faq-list h3,
+.legal-copy .faq-list p { margin-top: 0; }
+.legal-copy .faq-list p { margin-top: 0.5rem; }
+.legal-copy .contact-panel {
+  border: 1px solid #ceded7;
+  border-radius: 1rem;
+  background: #edf5f1;
+  padding: 1.5rem;
+}
+.legal-copy .contact-panel .eyebrow {
+  margin-top: 0;
+  color: #176b55;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.legal-copy .contact-panel h2 { margin-top: 0.5rem; }
+.legal-copy .contact-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+.legal-copy .legal-note {
+  margin-top: 2.5rem;
+  border-top: 1px solid #e3e3dc;
+  padding-top: 1.5rem;
+  color: #777870;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+@media (min-width: 640px) {
+  .legal-copy .contact-panel { padding: 2rem; }
+}
