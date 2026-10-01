@@ -2,6 +2,8 @@ import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { siteConfig } from "@/config/siteConfig";
+
 type TableOfContentsItem = {
   href: `#${string}`;
   label: string;
@@ -22,7 +24,7 @@ function Brand() {
       <span className="grid size-7 place-items-center rounded-lg bg-[#176b55] text-white">
         <FileCheck2 aria-hidden="true" className="size-4" />
       </span>
-      ScopeYes
+      {siteConfig.name}
     </span>
   );
 }
@@ -47,7 +49,7 @@ export function LegalPageShell({
       <header className="border-b border-[#e3e3dc] bg-[#f8f8f4]/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6">
           <Link
-            aria-label="ScopeYes home"
+            aria-label={`${siteConfig.name} home`}
             className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176b55] focus-visible:ring-offset-4"
             href="/"
           >
@@ -138,13 +140,13 @@ export function LegalPageShell({
             </nav>
           </div>
           <div className="mt-9 flex flex-col justify-between gap-3 border-t border-[#deded6] pt-6 text-xs text-[#85867e] sm:flex-row">
-            <p>© {new Date().getFullYear()} ScopeYes. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
             <a
               className="inline-flex items-center gap-1.5 hover:text-[#176b55]"
-              href="mailto:scopeyescontact@gmail.com"
+              href={`mailto:${siteConfig.supportEmail}`}
             >
               <Mail aria-hidden="true" className="size-3.5" />
-              scopeyescontact@gmail.com
+              {siteConfig.supportEmail}
             </a>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight, Check, CheckCircle2, ChevronDown, Clock3, FileCheck2,
@@ -9,6 +10,71 @@ import { SectionReveal } from "@/components/marketing/section-reveal";
 import { SmoothScroll } from "@/components/marketing/smooth-scroll";
 
 import { ProCheckoutButton } from "@/components/billing/pro-checkout-button";
+import { siteConfig } from "@/config/siteConfig";
+
+const pageTitle = "Change Request & Client Approval Software | ScopeYes";
+
+export const metadata: Metadata = {
+  title: { absolute: pageTitle },
+  description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: pageTitle,
+    description: siteConfig.description,
+    type: "website",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: siteConfig.description,
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      email: siteConfig.supportEmail,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: siteConfig.name,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description: siteConfig.description,
+      url: siteConfig.url,
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Free",
+          price: "0",
+          priceCurrency: "USD",
+        },
+        {
+          "@type": "Offer",
+          name: "Pro",
+          price: "8.99",
+          priceCurrency: "USD",
+        },
+      ],
+    },
+  ],
+};
 
 const benefits = [
   [FileCheck2, "Clear change requests", "Define the extra work, price, and delivery impact in language your client can understand."],
@@ -18,16 +84,29 @@ const benefits = [
 ] as const;
 
 const faqs = [
-  ["Does my client need a ScopeAprove account?", "No. Your client receives a private link where they can review and respond without creating an account."],
-  ["Is an approval legally binding?", "ScopeAprove creates a documented record of the request and response. It supports your existing agreement, but does not replace legal advice tailored to your jurisdiction."],
+  ["Does my client need a ScopeYes account?", "No. Your client receives a private link where they can review and respond without creating an account."],
+  ["Is an approval legally binding?", "ScopeYes creates a documented record of the request and response. It supports your existing agreement, but does not replace legal advice tailored to your jurisdiction."],
   ["Can I include both price and timeline changes?", "Yes. Every request can explain the work, additional cost, and delivery impact before your client decides."],
   ["What if the client does not approve?", "The request stays separate from the agreed scope, giving you a clear record without starting unapproved work."],
   ["Can I use it for an existing project?", "Yes. Add the current project and its original scope, then manage new requests from that point forward."],
   ["Can I cancel Pro at any time?", "Yes. Pro is $8.99 per month with no long-term commitment."],
 ] as const;
 
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
+
 function Brand() {
-  return <span className="inline-flex items-center gap-2.5 font-semibold tracking-[-0.02em]"><span className="grid size-7 place-items-center rounded-lg bg-[#176b55] text-white"><FileCheck2 className="size-4" /></span>ScopeAprove</span>;
+  return <span className="inline-flex items-center gap-2.5 font-semibold tracking-[-0.02em]"><span className="grid size-7 place-items-center rounded-lg bg-[#176b55] text-white"><FileCheck2 className="size-4" /></span>{siteConfig.name}</span>;
 }
 
 function Editorial({ children }: { children: React.ReactNode }) {
@@ -42,7 +121,7 @@ function RequestPreview() {
   return (
     <div className="mx-auto w-full max-w-[570px] rounded-2xl border border-[#deded5] bg-white p-5 shadow-[0_24px_70px_rgba(36,52,46,0.10)] sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#ecece5] pb-4 text-xs">
-        <span className="font-semibold">ScopeAprove <span className="ml-2 font-mono font-normal text-[#77776f]">/ CR-1048</span></span>
+        <span className="font-semibold">{siteConfig.name} <span className="ml-2 font-mono font-normal text-[#77776f]">/ CR-1048</span></span>
         <span className="rounded-full border border-[#d9c98e] bg-[#fbf7e9] px-2.5 py-1 font-medium text-[#80651a]">Awaiting approval</span>
       </div>
       <div className="py-5"><h2 className="text-xl font-semibold tracking-[-0.025em]">Add customer analytics dashboard</h2><p className="mt-2 text-xs leading-5 text-[#77776f]">Client: <b className="text-[#30312d]">Northstar Labs</b> · Project: <b className="text-[#30312d]">Website redesign</b></p></div>
@@ -57,10 +136,22 @@ function RequestPreview() {
 export default function Home() {
   return (
     <div className="landing-page min-h-screen w-full max-w-full overflow-x-hidden bg-[#f8f8f4] text-[#1b1c18] selection:bg-[#bce8d7]">
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
       <SmoothScroll />
       <HeroMotion />
       <SectionReveal />
-      <header className="sticky top-0 z-50 border-b border-[#e7e7df]/90 bg-[#f8f8f4]/90 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6"><Link href="/" aria-label="ScopeAprove home"><Brand /></Link><nav className="hidden items-center gap-7 text-sm font-medium text-[#666760] md:flex" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><div className="flex items-center gap-3"><Link className="hidden text-sm font-medium text-[#62635d] sm:block" href="/sign-in">Sign in</Link><Link className="rounded-lg bg-[#176b55] px-4 py-2.5 text-xs font-semibold text-white shadow-sm sm:text-sm" href="/sign-in">Get started free</Link></div></div></header>
+      <header className="sticky top-0 z-50 border-b border-[#e7e7df]/90 bg-[#f8f8f4]/90 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6"><Link href="/" aria-label={`${siteConfig.name} home`}><Brand /></Link><nav className="hidden items-center gap-7 text-sm font-medium text-[#666760] md:flex" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><div className="flex items-center gap-3"><Link className="hidden text-sm font-medium text-[#62635d] sm:block" href="/sign-in">Sign in</Link><Link className="rounded-lg bg-[#176b55] px-4 py-2.5 text-xs font-semibold text-white shadow-sm sm:text-sm" href="/sign-in">Get started free</Link></div></div></header>
 
       <main>
         <section className="relative mx-auto max-w-[1180px] px-5 pb-20 pt-14 sm:px-6 sm:pt-20 lg:pb-28 lg:pt-24"><div aria-hidden className="absolute -right-40 top-0 size-[520px] rounded-full bg-[#dceee6]/50 blur-3xl" /><div className="relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]"><div><div className="inline-flex items-center gap-2 rounded-full border border-[#176b55]/15 bg-[#eaf3ef] px-3 py-1.5 text-xs font-semibold text-[#176b55]"><span className="size-1.5 rounded-full bg-[#176b55]" />Scope changes, properly approved.</div><h1 className="mt-6 max-w-[640px] text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[4.25rem]">Stop doing <Editorial>extra work</Editorial> for free.</h1><p className="mt-6 max-w-xl text-base leading-7 text-[#64655f] sm:text-lg sm:leading-8">Turn client requests into clear, documented change approvals—with pricing, timeline impact, and a decision recorded before work begins.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#176b55] px-5 py-3 text-sm font-semibold text-white" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><a className="inline-flex items-center justify-center rounded-lg border border-[#deded5] bg-white px-5 py-3 text-sm font-semibold" href="#how-it-works">See how it works</a></div><p className="mt-4 flex items-center gap-2 text-xs text-[#7a7b74]"><CheckCircle2 className="size-4 text-[#176b55]" />Free to start · No credit card required</p></div><RequestPreview /></div></section>
@@ -101,7 +192,7 @@ export default function Home() {
               </h2>
 
               <p className="mt-4 text-[#666760]">
-                Start free. Upgrade when ScopeAprove becomes part of your regular
+                Start free. Upgrade when {siteConfig.name} becomes part of your regular
                 client workflow.
               </p>
             </div>
@@ -201,7 +292,7 @@ export default function Home() {
 
         <section className="mx-auto max-w-[1180px] px-5 pb-20 sm:px-6 lg:pb-24"><div className="relative overflow-hidden rounded-3xl bg-[#191b19] px-6 py-16 text-center text-white sm:px-12 sm:py-20"><div aria-hidden className="absolute left-1/2 top-0 h-40 w-3/4 -translate-x-1/2 rounded-full bg-[#176b55]/20 blur-3xl" /><div className="relative"><h2 className="text-3xl font-semibold tracking-[-0.045em] sm:text-5xl">Make the next scope change <span className="font-[family-name:var(--font-editorial)] font-normal italic text-[#a4e7cd]">clear.</span></h2><p className="mx-auto mt-4 max-w-xl leading-7 text-[#a9aaa4]">Document the work, agree on the impact, and get approval before you begin.</p><Link className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#a4e7cd] px-5 py-3 text-sm font-semibold text-[#173b30]" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><p className="mt-4 text-xs text-[#7f817b]">Free to start · No credit card required</p></div></div></section>
       </main>
-      <footer className="border-t border-[#e2e2da] bg-[#f2f2ec]"><div className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6"><div className="flex flex-col justify-between gap-8 sm:flex-row"><div><Brand /><p className="mt-2 text-sm text-[#6e6f68]">Clear scope. Confident approvals.</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#62635d]"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><Link href="/sign-in">Sign in</Link><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></div></div><div className="mt-9 flex flex-col justify-between gap-3 border-t border-[#deded6] pt-6 text-xs text-[#85867e] sm:flex-row"><p>© {new Date().getFullYear()} ScopeAprove. All rights reserved.</p><p>Built for better client work.</p></div></div></footer>
+      <footer className="border-t border-[#e2e2da] bg-[#f2f2ec]"><div className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6"><div className="flex flex-col justify-between gap-8 sm:flex-row"><div><Brand /><p className="mt-2 text-sm text-[#6e6f68]">Clear scope. Confident approvals.</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#62635d]"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><Link href="/sign-in">Sign in</Link><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></div></div><div className="mt-9 flex flex-col justify-between gap-3 border-t border-[#deded6] pt-6 text-xs text-[#85867e] sm:flex-row"><p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p><p>Built for better client work.</p></div></div></footer>
     </div>
   );
 }

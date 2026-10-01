@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar";
 import { requireUser } from "@/lib/auth-session";
 import { DashboardMain } from "@/components/dashboard/dashboard-main";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  robots: {
+    index: false,
+    follow: false,
+    noarchive: true,
+  },
+};
 
 export default async function DashboardLayout({
   children,

@@ -53,7 +53,7 @@ export default async function SettingsPage() {
         </h1>
 
         <p className="mt-1 text-sm text-muted-foreground">
-          Manage your ScopeAprove profile, plan, and workspace security.
+          Manage your ScopeYes profile, plan, and workspace security.
         </p>
       </header>
 

@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
+
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+  description: "Sign in to your ScopeYes workspace.",
+  robots: {
+    index: false,
+    follow: false,
+    noarchive: true,
+  },
+};
 
 export default function SignInPage() {
   return (

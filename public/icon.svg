@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">ScopeYes</title>
+  <rect width="512" height="512" rx="112" fill="#176b55"/>
+  <path d="M154 92h139l65 65v263H154z" fill="none" stroke="#fff" stroke-width="34" stroke-linejoin="round"/>
+  <path d="M293 92v65h65M205 274l38 38 76-82" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

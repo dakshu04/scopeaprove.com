@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { LegalPageShell } from "@/components/legal/legal-page-shell";
+import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
-const pageUrl = "https://scopeyes.vercel.app/privacy";
+const pageUrl = absoluteUrl("/privacy");
 const lastUpdated = "September 29, 2026";
 
 export const metadata: Metadata = {
@@ -49,8 +50,8 @@ const structuredData = {
   dateModified: "2026-09-29",
   isPartOf: {
     "@type": "WebSite",
-    name: "ScopeYes",
-    url: "https://scopeyes.vercel.app/",
+    name: siteConfig.name,
+    url: siteConfig.url,
   },
 };
 
@@ -87,8 +88,8 @@ export default function PrivacyPage() {
         <p>
           Questions about this policy or our handling of information can be
           sent to{" "}
-          <a href="mailto:scopeyescontact@gmail.com">
-            scopeyescontact@gmail.com
+          <a href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
           </a>
           .
         </p>
@@ -293,8 +294,8 @@ export default function PrivacyPage() {
           These rights vary by jurisdiction and may be subject to exceptions.
           You can update some project information within the product. For a
           privacy request, email{" "}
-          <a href="mailto:scopeyescontact@gmail.com">
-            scopeyescontact@gmail.com
+          <a href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
           </a>
           . We may need to verify your identity before acting on a request.
           Account holders are responsible for handling requests concerning
@@ -307,7 +308,7 @@ export default function PrivacyPage() {
         <h2>9. How can I request account deletion?</h2>
         <p className="answer">
           ScopeYes does not currently provide a self-service account-deletion
-          button. To request deletion, email scopeyescontact@gmail.com from the
+          button. To request deletion, email {siteConfig.supportEmail} from the
           email address associated with your account.
         </p>
         <p>
@@ -327,8 +328,8 @@ export default function PrivacyPage() {
         <p>
           If you believe a child has provided personal information to ScopeYes,
           contact{" "}
-          <a href="mailto:scopeyescontact@gmail.com">
-            scopeyescontact@gmail.com
+          <a href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
           </a>{" "}
           so we can review the situation and take appropriate action.
         </p>
@@ -379,7 +380,7 @@ export default function PrivacyPage() {
             <h3>Can I correct inaccurate information?</h3>
             <p>
               Some account and project details can be updated in ScopeYes. For
-              other corrections, email scopeyescontact@gmail.com.
+              other corrections, email {siteConfig.supportEmail}.
             </p>
           </div>
         </div>
@@ -393,8 +394,8 @@ export default function PrivacyPage() {
           deletion requests, email us. Please do not include passwords, secret
           keys, or complete payment-card details.
         </p>
-        <a className="contact-link" href="mailto:scopeyescontact@gmail.com">
-          scopeyescontact@gmail.com
+        <a className="contact-link" href={`mailto:${siteConfig.supportEmail}`}>
+          {siteConfig.supportEmail}
         </a>
       </section>
 

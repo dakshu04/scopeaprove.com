@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
+import { siteConfig } from "@/config/siteConfig";
 import { prisma } from "@/lib/prisma";
 
 const betterAuthSecret = process.env.BETTER_AUTH_SECRET;
@@ -18,7 +19,7 @@ if (
 }
 
 export const auth = betterAuth({
-  appName: "ScopeAprove",
+  appName: siteConfig.name,
   secret: betterAuthSecret,
   baseURL: betterAuthUrl,
   database: prismaAdapter(prisma, {

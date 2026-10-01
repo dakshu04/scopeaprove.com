@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { LegalPageShell } from "@/components/legal/legal-page-shell";
+import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
-const pageUrl = "https://scopeyes.vercel.app/terms";
+const pageUrl = absoluteUrl("/terms");
 const lastUpdated = "September 29, 2026";
 
 export const metadata: Metadata = {
@@ -51,8 +52,8 @@ const structuredData = {
   dateModified: "2026-09-29",
   isPartOf: {
     "@type": "WebSite",
-    name: "ScopeYes",
-    url: "https://scopeyes.vercel.app/",
+    name: siteConfig.name,
+    url: siteConfig.url,
   },
 };
 
@@ -228,8 +229,8 @@ export default function TermsPage() {
           ScopeYes does not state a universal refund promise in these Terms.
           Refund eligibility, if any, depends on the checkout terms and
           applicable law. Send billing questions to{" "}
-          <a href="mailto:scopeyescontact@gmail.com">
-            scopeyescontact@gmail.com
+          <a href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
           </a>
           .
         </p>
@@ -409,8 +410,8 @@ export default function TermsPage() {
           For questions about these Terms, subscriptions, account access, or
           ScopeYes generally, contact us by email.
         </p>
-        <a className="contact-link" href="mailto:scopeyescontact@gmail.com">
-          scopeyescontact@gmail.com
+        <a className="contact-link" href={`mailto:${siteConfig.supportEmail}`}>
+          {siteConfig.supportEmail}
         </a>
       </section>
 
