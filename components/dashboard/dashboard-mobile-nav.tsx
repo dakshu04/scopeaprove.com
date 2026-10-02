@@ -11,6 +11,7 @@ import {
   Settings,
 } from "lucide-react";
 
+import { DashboardPlanCard } from "@/components/dashboard/dashboard-plan-card";
 import {
   Sheet,
   SheetContent,
@@ -37,14 +38,13 @@ const navigation = [
     href: "/dashboard/change-requests",
     icon: FilePenLine,
   },
-  {
-    label: "Settings",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
 ];
 
-export function DashboardMobileNav() {
+export function DashboardMobileNav({
+  plan,
+}: {
+  plan: "FREE" | "PRO";
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -59,7 +59,7 @@ export function DashboardMobileNav() {
 
       <SheetContent
         side="left"
-        className="w-72 gap-0 bg-sidebar p-0 shadow-xl"
+        className="flex w-72 flex-col gap-0 bg-sidebar p-0 shadow-xl"
       >
         <SheetHeader className="flex h-16 justify-center border-b border-sidebar-border px-5 py-0">
           <SheetTitle className="flex items-center gap-3 text-left text-sm font-semibold tracking-tight">
@@ -73,7 +73,7 @@ export function DashboardMobileNav() {
         </SheetHeader>
 
         <nav
-          className="flex flex-col gap-1.5 px-3 py-5"
+          className="flex flex-1 flex-col gap-1.5 px-3 py-5"
           aria-label="Mobile dashboard navigation"
         >
           {navigation.map((item) => {
@@ -103,6 +103,30 @@ export function DashboardMobileNav() {
             );
           })}
         </nav>
+
+        <div className="shrink-0 border-t border-sidebar-border p-3">
+          <DashboardPlanCard
+            plan={plan}
+            onNavigate={() => setOpen(false)}
+          />
+
+          <Link
+            href="/dashboard/settings"
+            onClick={() => setOpen(false)}
+            aria-current={
+              pathname === "/dashboard/settings" ? "page" : undefined
+            }
+            className={cn(
+              "mt-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+              pathname === "/dashboard/settings"
+                ? "bg-sidebar-accent font-semibold text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
+            )}
+          >
+            <Settings className="size-4" aria-hidden="true" />
+            Settings
+          </Link>
+        </div>
       </SheetContent>
     </Sheet>
   );
