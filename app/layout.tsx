@@ -4,6 +4,9 @@ import "lenis/dist/lenis.css";
 import { siteConfig } from "@/config/siteConfig";
 import "./globals.css";
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -65,13 +68,19 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  
+  const googleAnalyticsId =
+    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
   return (
     <html
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}
+       <Analytics />
+      </body>
+      {googleAnalyticsId ? (
+        <GoogleAnalytics gaId={googleAnalyticsId} />
+      ) : null}
     </html>
   );
 }
