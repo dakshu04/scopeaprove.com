@@ -3,7 +3,7 @@ import { Instrument_Serif, Inter } from "next/font/google";
 import "lenis/dist/lenis.css";
 import { siteConfig } from "@/config/siteConfig";
 import "./globals.css";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 
