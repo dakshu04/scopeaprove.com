@@ -9,6 +9,7 @@ import {
   Settings,
 } from "lucide-react";
 
+import { DashboardPlanCard } from "@/components/dashboard/dashboard-plan-card";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -31,9 +32,11 @@ const navigation = [
 
 export function DashboardSidebar({
   email,
+  isPro,
   name,
 }: {
   email: string;
+  isPro: boolean;
   name: string;
 }) {
   const pathname = usePathname();
@@ -100,6 +103,8 @@ export function DashboardSidebar({
       </nav>
 
       <div className="shrink-0 border-t border-sidebar-border p-3">
+        <DashboardPlanCard className="mb-3" isPro={isPro} />
+
         <Link
           href="/dashboard/settings"
           className={cn(

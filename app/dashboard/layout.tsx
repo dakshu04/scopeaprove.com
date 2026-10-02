@@ -4,6 +4,7 @@ import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar";
 import { requireUser } from "@/lib/auth-session";
 import { DashboardMain } from "@/components/dashboard/dashboard-main";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { getBillingEntitlements } from "@/lib/billing";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -18,13 +19,22 @@ export default async function DashboardLayout({
   children,
 }: LayoutProps<"/dashboard">) {
   const user = await requireUser();
+  const entitlements = await getBillingEntitlements(user.id);
 
   return (
     <div className="flex h-dvh overflow-hidden bg-background text-foreground">
-      <DashboardSidebar name={user.name} email={user.email} />
+      <DashboardSidebar
+        name={user.name}
+        email={user.email}
+        isPro={entitlements.isPro}
+      />
 
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <DashboardHeader name={user.name} email={user.email} />
+        <DashboardHeader
+          name={user.name}
+          email={user.email}
+          isPro={entitlements.isPro}
+        />
 
         <DashboardMain>{children}</DashboardMain>
       </div>

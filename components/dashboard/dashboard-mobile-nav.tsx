@@ -19,6 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { DashboardPlanCard } from "@/components/dashboard/dashboard-plan-card";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -37,14 +38,9 @@ const navigation = [
     href: "/dashboard/change-requests",
     icon: FilePenLine,
   },
-  {
-    label: "Settings",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
 ];
 
-export function DashboardMobileNav() {
+export function DashboardMobileNav({ isPro }: { isPro: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -102,6 +98,25 @@ export function DashboardMobileNav() {
               </Link>
             );
           })}
+
+          <DashboardPlanCard className="my-3" isPro={isPro} />
+
+          <Link
+            href="/dashboard/settings"
+            onClick={() => setOpen(false)}
+            aria-current={
+              pathname === "/dashboard/settings" ? "page" : undefined
+            }
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all",
+              pathname === "/dashboard/settings"
+                ? "bg-sidebar-accent font-semibold text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
+            )}
+          >
+            <Settings className="size-4" aria-hidden="true" />
+            Settings
+          </Link>
         </nav>
       </SheetContent>
     </Sheet>

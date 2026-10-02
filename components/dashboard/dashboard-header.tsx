@@ -22,9 +22,11 @@ function getPageTitle(pathname: string) {
 
 export function DashboardHeader({
   email,
+  isPro,
   name,
 }: {
   email: string;
+  isPro: boolean;
   name: string;
 }) {
   const pathname = usePathname();
@@ -34,7 +36,7 @@ export function DashboardHeader({
     <header className="z-20 shrink-0 border-b border-border/80 bg-white/90 backdrop-blur-xl">
       <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <DashboardMobileNav />
+          <DashboardMobileNav isPro={isPro} />
           <div className="hidden min-w-0 md:block">
             <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               Client workspace
