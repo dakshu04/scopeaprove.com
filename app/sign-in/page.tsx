@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
+import {
+  ArrowLeft,
+  Check,
+  CheckCircle2,
+  Clock3,
+  FileCheck2,
+  LockKeyhole,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+import Link from "next/link";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -13,108 +23,204 @@ export const metadata: Metadata = {
   },
 };
 
+const trustPoints = [
+  { icon: ShieldCheck, label: "Private workspace" },
+  { icon: LockKeyhole, label: "Secure Google sign-in" },
+  { icon: Clock3, label: "Ready in seconds" },
+];
+
 export default function SignInPage() {
   return (
-    <main className="min-h-screen bg-[#f8f8f5] text-[#202320]">
-      {/* Header */}
-      <header className="border-b border-[#e5e5df] bg-[#f8f8f5]">
-        <div className="mx-auto flex h-[78px] max-w-[1200px] items-center justify-between px-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-5 w-5 items-center justify-center bg-[#176f5c] text-white">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z" />
-                <path d="M14 3v6h6" />
-                <path d="m9 14 3 3 5-5" />
-              </svg>
-            </div>
-
-            <span className="text-[15px] font-semibold tracking-[-0.02em]">
+    <main className="relative min-h-dvh overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(213,235,225,0.72),transparent_34%),linear-gradient(180deg,#fafbf9_0%,#f1f5f2_100%)] text-foreground">
+      <header className="relative z-20 h-16 border-b border-border/70 bg-white/65 backdrop-blur-xl">
+        <div className="mx-auto flex h-full max-w-[1180px] items-center justify-between px-4 sm:px-6">
+          <Link
+            href="/"
+            className="group flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span className="grid size-8 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-[0_6px_16px_rgba(23,107,85,0.2)] transition-transform group-hover:-translate-y-0.5">
+              S
+            </span>
+            <span className="text-sm font-semibold tracking-[-0.02em]">
               ScopeYes
             </span>
           </Link>
 
           <Link
             href="/"
-            className="text-[14px] font-medium text-[#666963] transition-colors hover:text-[#176f5c]"
+            className="group inline-flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
           >
+            <ArrowLeft
+              className="size-3.5 transition-transform group-hover:-translate-x-0.5"
+              aria-hidden="true"
+            />
             Back to home
           </Link>
         </div>
       </header>
 
-      {/* Main */}
-      <section className="relative flex min-h-[calc(100vh-78px)] items-center justify-center overflow-hidden px-6 py-16">
-        {/* Subtle green glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#176f5c]/[0.045] blur-[100px]" />
+      <section className="relative z-10 flex min-h-[calc(100dvh-4rem)] items-center justify-center px-4 py-5 sm:px-6 sm:py-8">
+        <div
+          className="pointer-events-none absolute -left-24 top-20 size-72 rounded-full bg-[#cce5da]/40 blur-3xl"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -right-28 bottom-10 size-80 rounded-full bg-[#f0dcae]/25 blur-3xl"
+          aria-hidden="true"
+        />
 
-        <div className="relative w-full max-w-[440px]">
-          {/* Small eyebrow */}
-          <div className="mb-7 flex justify-center">
-            <div className="inline-flex items-center gap-2 border border-[#cfe2dc] bg-[#eef6f3] px-4 py-2 text-[13px] font-medium text-[#176f5c]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#176f5c]" />
-              Scope changes, properly approved.
+        <div className="relative grid w-full max-w-[1040px] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white shadow-[0_32px_90px_rgba(26,52,43,0.13)] lg:min-h-[600px] lg:grid-cols-[1.05fr_0.95fr]">
+          <aside className="relative hidden overflow-hidden bg-[#173d32] p-10 text-white lg:flex lg:flex-col lg:justify-between">
+            <div
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-[#62b394]/20 blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.07] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#b8e4d2]">
+                <Sparkles className="size-3" aria-hidden="true" />
+                Better client work
+              </div>
+
+              <h1 className="mt-6 max-w-md text-[2.65rem] font-semibold leading-[1.04] tracking-[-0.05em]">
+                Clear scope.
+                <br />
+                <span className="font-[family-name:var(--font-editorial)] font-normal italic text-[#a9e5cc]">
+                  Confident approvals.
+                </span>
+              </h1>
+
+              <p className="mt-5 max-w-md text-sm leading-6 text-white/62">
+                Keep every change, cost, and client decision documented before
+                extra work begins.
+              </p>
             </div>
-          </div>
 
-          {/* Heading */}
-          <div className="text-center">
-            <h1 className="text-[42px] font-semibold leading-[1.05] tracking-[-0.045em] text-[#171917]">
-              Welcome back.
-            </h1>
+            <div className="relative my-8 rounded-2xl border border-white/10 bg-white/[0.07] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.16)] backdrop-blur-sm">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-white/45">
+                    Change request
+                  </p>
+                  <p className="mt-1 text-sm font-semibold">
+                    Analytics dashboard
+                  </p>
+                </div>
+                <span className="rounded-full bg-[#a9e5cc] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#173d32]">
+                  Ready to review
+                </span>
+              </div>
 
-            <p className="mx-auto mt-4 max-w-[350px] text-[16px] leading-7 text-[#6d706b]">
-              Sign in to manage your projects, scope changes, and client
-              approvals.
-            </p>
-          </div>
+              <div className="grid grid-cols-2 gap-3 py-4">
+                <div className="rounded-xl bg-black/10 p-3">
+                  <p className="text-[9px] uppercase tracking-[0.12em] text-white/45">
+                    Additional cost
+                  </p>
+                  <p className="mt-1 text-lg font-semibold">$750</p>
+                </div>
+                <div className="rounded-xl bg-black/10 p-3">
+                  <p className="text-[9px] uppercase tracking-[0.12em] text-white/45">
+                    Timeline
+                  </p>
+                  <p className="mt-1 text-lg font-semibold">+5 days</p>
+                </div>
+              </div>
 
-          {/* Auth box */}
-          <div className="mt-9 border border-[#dedfd9] bg-white p-7 shadow-[0_18px_50px_rgba(32,35,32,0.06)]">
-            <GoogleSignInButton />
-
-            <div className="mt-5 flex items-center justify-center gap-2 text-[12px] text-[#8a8d87]">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <rect x="5" y="11" width="14" height="10" rx="2" />
-                <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-              </svg>
-
-              Secure authentication with Google
+              <div className="flex items-center justify-between rounded-xl border border-[#a9e5cc]/15 bg-[#a9e5cc]/10 px-3.5 py-3">
+                <span className="flex items-center gap-2 text-xs text-[#d8f4e8]">
+                  <FileCheck2 className="size-4" aria-hidden="true" />
+                  Client decision recorded
+                </span>
+                <CheckCircle2
+                  className="size-4 text-[#a9e5cc]"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Footer copy */}
-          <p className="mt-7 text-center text-[12px] leading-5 text-[#8a8d87]">
-            By continuing, you agree to our{" "}
-            <Link
-              href="/terms"
-              className="text-[#666963] underline underline-offset-4 hover:text-[#176f5c]"
-            >
-              Terms
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/privacy"
-              className="text-[#666963] underline underline-offset-4 hover:text-[#176f5c]"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </p>
+            <div className="relative flex flex-wrap gap-x-5 gap-y-2 text-[10px] text-white/52">
+              {["Clear scope", "Recorded decisions", "Protected margins"].map(
+                (item) => (
+                  <span className="flex items-center gap-1.5" key={item}>
+                    <Check className="size-3 text-[#a9e5cc]" aria-hidden="true" />
+                    {item}
+                  </span>
+                ),
+              )}
+            </div>
+          </aside>
+
+          <section className="flex flex-col justify-center px-5 py-8 sm:px-10 sm:py-10 lg:px-12">
+            <div className="mx-auto w-full max-w-[390px]">
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-secondary/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary lg:hidden">
+                <Sparkles className="size-3" aria-hidden="true" />
+                Clear scope. Confident approvals.
+              </div>
+
+              <p className="text-[10px] font-bold uppercase tracking-[0.17em] text-primary">
+                Welcome to ScopeYes
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-[-0.045em] text-[#18231f] sm:text-[2.4rem]">
+                Welcome back.
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Continue with Google to manage your projects, scope changes, and
+                client approvals.
+              </p>
+
+              <div className="mt-7 rounded-2xl border border-border/80 bg-[#fbfcfb] p-2 shadow-[0_12px_32px_rgba(31,49,42,0.06)]">
+                <GoogleSignInButton />
+              </div>
+
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {trustPoints.map((point) => {
+                  const Icon = point.icon;
+
+                  return (
+                    <div
+                      key={point.label}
+                      className="flex min-w-0 flex-col items-center gap-1.5 rounded-xl border border-border/60 bg-white px-2 py-3 text-center"
+                    >
+                      <span className="grid size-7 place-items-center rounded-lg bg-secondary text-primary">
+                        <Icon className="size-3.5" aria-hidden="true" />
+                      </span>
+                      <span className="text-[9px] font-medium leading-3 text-muted-foreground">
+                        {point.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 border-t border-border/70 pt-5">
+                <p className="text-center text-xs leading-5 text-muted-foreground">
+                  New to ScopeYes? Your free workspace is created automatically
+                  when you continue.
+                </p>
+                <p className="mt-4 text-center text-[10px] leading-5 text-muted-foreground">
+                  By continuing, you agree to our{" "}
+                  <Link
+                    href="/terms"
+                    className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary"
+                  >
+                    Terms
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="/privacy"
+                    className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary"
+                  >
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </main>

@@ -11,6 +11,7 @@ export function DashboardMain({
 }) {
   const pathname = usePathname();
   const isFixedWorkspace =
+    pathname === "/dashboard" ||
     pathname === "/dashboard/change-requests" ||
     pathname === "/dashboard/projects";
 
