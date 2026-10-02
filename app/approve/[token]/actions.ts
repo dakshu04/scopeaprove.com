@@ -163,7 +163,6 @@ export async function recordApprovalDecision(
     };
   }
 
-  revalidatePath(`/approve/${token}`);
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/change-requests");
 
