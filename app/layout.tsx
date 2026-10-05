@@ -9,6 +9,22 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 
+const defaultTitle =
+  "Scope Change & Client Approval Software for Freelancers | ScopeYes";
+
+const seoKeywords = [
+  "client approval software",
+  "scope change software",
+  "change request software",
+  "freelancer scope management",
+  "scope creep tool",
+  "client change request tool",
+  "project change order software",
+  "client sign off software",
+  "freelance project management",
+  "extra work approval",
+] as const;
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -26,14 +42,19 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
 
   title: {
-    default: "Change Request & Client Approval Software | ScopeYes",
+    default: defaultTitle,
     template: `%s | ${siteConfig.name}`,
   },
 
   description: siteConfig.description,
+  keywords: [...seoKeywords],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
   category: "business",
+  classification: "Business software for freelancers and small teams",
+  referrer: "origin-when-cross-origin",
+  manifest: "/manifest.webmanifest",
 
   formatDetection: {
     address: false,
@@ -45,15 +66,28 @@ export const metadata: Metadata = {
     type: "website",
     locale: siteConfig.locale,
     siteName: siteConfig.name,
-    title: "Change Request & Client Approval Software | ScopeYes",
+    title: defaultTitle,
     description: siteConfig.description,
     url: "/",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Change Request & Client Approval Software | ScopeYes",
+    title: defaultTitle,
     description: siteConfig.description,
+  },
+
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? {
+          other: {
+            "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+          },
+        }
+      : {}),
   },
 
   robots: {
@@ -91,11 +125,10 @@ export default function RootLayout({
 
         <Analytics />
         <SpeedInsights />
+        {googleAnalyticsId ? (
+          <GoogleAnalytics gaId={googleAnalyticsId} />
+        ) : null}
       </body>
-
-      {googleAnalyticsId ? (
-        <GoogleAnalytics gaId={googleAnalyticsId} />
-      ) : null}
     </html>
   );
 }

@@ -10,9 +10,10 @@ import { SectionReveal } from "@/components/marketing/section-reveal";
 import { SmoothScroll } from "@/components/marketing/smooth-scroll";
 
 import { ProCheckoutButton } from "@/components/billing/pro-checkout-button";
-import { siteConfig } from "@/config/siteConfig";
+import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
-const pageTitle = "Change Request & Client Approval Software | ScopeYes";
+const pageTitle =
+  "Scope Change & Client Approval Software for Freelancers | ScopeYes";
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     type: "website",
     url: "/",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
   },
   twitter: {
     card: "summary_large_image",
@@ -42,6 +45,10 @@ const structuredData = {
       name: siteConfig.name,
       url: siteConfig.url,
       email: siteConfig.supportEmail,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/icon.svg"),
+      },
     },
     {
       "@type": "WebSite",
@@ -49,29 +56,62 @@ const structuredData = {
       name: siteConfig.name,
       url: siteConfig.url,
       description: siteConfig.description,
+      inLanguage: siteConfig.language,
       publisher: { "@id": `${siteConfig.url}/#organization` },
     },
     {
-      "@type": "SoftwareApplication",
+      "@type": "WebApplication",
+      "@id": `${siteConfig.url}/#software`,
       name: siteConfig.name,
       applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Project Management Software",
       operatingSystem: "Web",
+      browserRequirements: "Requires a modern web browser with JavaScript enabled",
       description: siteConfig.description,
       url: siteConfig.url,
+      image: absoluteUrl("/opengraph-image"),
+      isAccessibleForFree: true,
+      provider: { "@id": `${siteConfig.url}/#organization` },
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType:
+          "Freelancers, independent consultants, agencies, and small service teams",
+      },
+      featureList: [
+        "Document project scope changes",
+        "Show additional cost and timeline impact",
+        "Send private client approval links",
+        "Record client decisions and timestamps",
+        "Track change request history",
+      ],
       offers: [
         {
           "@type": "Offer",
           name: "Free",
           price: "0",
           priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: absoluteUrl("/sign-in"),
         },
         {
           "@type": "Offer",
           name: "Pro",
           price: "8.99",
           priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: absoluteUrl("/#pricing"),
         },
       ],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/#webpage`,
+      url: siteConfig.url,
+      name: pageTitle,
+      description: siteConfig.description,
+      inLanguage: siteConfig.language,
+      isPartOf: { "@id": `${siteConfig.url}/#website` },
+      about: { "@id": `${siteConfig.url}/#software` },
     },
   ],
 };
@@ -154,9 +194,9 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-[#e7e7df]/90 bg-[#f8f8f4]/90 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6"><Link href="/" aria-label={`${siteConfig.name} home`}><Brand /></Link><nav className="hidden items-center gap-7 text-sm font-medium text-[#666760] md:flex" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><div className="flex items-center gap-3"><Link className="hidden text-sm font-medium text-[#62635d] sm:block" href="/sign-in">Sign in</Link><Link className="rounded-lg bg-[#176b55] px-4 py-2.5 text-xs font-semibold text-white shadow-sm sm:text-sm" href="/sign-in">Get started free</Link></div></div></header>
 
       <main>
-        <section className="relative mx-auto max-w-[1180px] px-5 pb-20 pt-14 sm:px-6 sm:pt-20 lg:pb-28 lg:pt-24"><div aria-hidden className="absolute -right-40 top-0 size-[520px] rounded-full bg-[#dceee6]/50 blur-3xl" /><div className="relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]"><div><div className="inline-flex items-center gap-2 rounded-full border border-[#176b55]/15 bg-[#eaf3ef] px-3 py-1.5 text-xs font-semibold text-[#176b55]"><span className="size-1.5 rounded-full bg-[#176b55]" />Scope changes, properly approved.</div><h1 className="mt-6 max-w-[640px] text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[4.25rem]">Stop doing <Editorial>extra work</Editorial> for free.</h1><p className="mt-6 max-w-xl text-base leading-7 text-[#64655f] sm:text-lg sm:leading-8">Turn client requests into clear, documented change approvals—with pricing, timeline impact, and a decision recorded before work begins.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#176b55] px-5 py-3 text-sm font-semibold text-white" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><a className="inline-flex items-center justify-center rounded-lg border border-[#deded5] bg-white px-5 py-3 text-sm font-semibold" href="#how-it-works">See how it works</a></div><p className="mt-4 flex items-center gap-2 text-xs text-[#7a7b74]"><CheckCircle2 className="size-4 text-[#176b55]" />Free to start · No credit card required</p></div><RequestPreview /></div></section>
+        <section className="relative mx-auto max-w-[1180px] px-5 pb-20 pt-14 sm:px-6 sm:pt-20 lg:pb-28 lg:pt-24"><div aria-hidden className="absolute -right-40 top-0 size-[520px] rounded-full bg-[#dceee6]/50 blur-3xl" /><div className="relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]"><div><div className="inline-flex items-center gap-2 rounded-full border border-[#176b55]/15 bg-[#eaf3ef] px-3 py-1.5 text-xs font-semibold text-[#176b55]"><span className="size-1.5 rounded-full bg-[#176b55]" />Client approval software for freelancers</div><h1 className="mt-6 max-w-[640px] text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[4.25rem]">Stop doing <Editorial>extra work</Editorial> for free.</h1><p className="mt-6 max-w-xl text-base leading-7 text-[#64655f] sm:text-lg sm:leading-8">Control scope creep by turning client requests into documented change approvals—with pricing, timeline impact, and a decision recorded before work begins.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#176b55] px-5 py-3 text-sm font-semibold text-white" href="/sign-in">Create your first request <ArrowRight className="size-4" /></Link><a className="inline-flex items-center justify-center rounded-lg border border-[#deded5] bg-white px-5 py-3 text-sm font-semibold" href="#how-it-works">See how it works</a></div><p className="mt-4 flex items-center gap-2 text-xs text-[#7a7b74]"><CheckCircle2 className="size-4 text-[#176b55]" />Free to start · No credit card required</p></div><RequestPreview /></div></section>
 
-        <section className="border-y border-[#e4e4dc] bg-white py-20 lg:py-24"><div className="mx-auto max-w-[1180px] px-5 sm:px-6"><div className="max-w-2xl"><h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Small requests become <Editorial>expensive problems.</Editorial></h2><p className="mt-4 leading-7 text-[#666760]">A quick message can quietly add hours of unpaid work. Give every change a clear scope, price, timeline, and decision record.</p></div><div className="mt-12 grid gap-8 md:grid-cols-3">{[["Verbal request", "Documented change", "Capture the requirement before starting extra work."], ["Unclear cost", "Approved price", "Agree on the impact instead of debating the invoice later."], ["Scattered messages", "One decision record", "Keep the request and response together in one place."]].map(([before, after, text]) => <article className="border-l-2 border-[#dadbd3] pl-6" key={before}><p className="text-sm font-semibold"><span className="text-[#999a93] line-through">{before}</span><ArrowRight className="mx-2 inline size-3.5 text-[#176b55]" /><span className="text-[#176b55]">{after}</span></p><p className="mt-3 text-sm leading-6 text-[#6d6e67]">{text}</p></article>)}</div></div></section>
+        <section className="border-y border-[#e4e4dc] bg-white py-20 lg:py-24"><div className="mx-auto max-w-[1180px] px-5 sm:px-6"><div className="max-w-2xl"><h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Scope creep becomes <Editorial>expensive problems.</Editorial></h2><p className="mt-4 leading-7 text-[#666760]">For freelancers and small teams, a quick client message can quietly add hours of unpaid work. Give every change a clear scope, price, timeline, and decision record.</p></div><div className="mt-12 grid gap-8 md:grid-cols-3">{[["Verbal request", "Documented change", "Capture the requirement before starting extra work."], ["Unclear cost", "Approved price", "Agree on the impact instead of debating the invoice later."], ["Scattered messages", "One decision record", "Keep the request and response together in one place."]].map(([before, after, text]) => <article className="border-l-2 border-[#dadbd3] pl-6" key={before}><p className="text-sm font-semibold"><span className="text-[#999a93] line-through">{before}</span><ArrowRight className="mx-2 inline size-3.5 text-[#176b55]" /><span className="text-[#176b55]">{after}</span></p><p className="mt-3 text-sm leading-6 text-[#6d6e67]">{text}</p></article>)}</div></div></section>
 
         <section className="mx-auto max-w-[1180px] scroll-mt-24 px-5 py-20 sm:px-6 lg:py-28" id="how-it-works"><div className="max-w-2xl"><Eyebrow>Workflow</Eyebrow><h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">From client request to approval in <Editorial>minutes.</Editorial></h2><p className="mt-4 leading-7 text-[#666760]">A simple workflow built to protect your margin without making the client relationship feel difficult.</p></div><div className="mt-12 grid gap-4 md:grid-cols-3">{[["01", "Describe the change", "Summarize the work and explain what sits outside the original agreement."], ["02", "Add the impact", "Set the extra price, delivery adjustment, and specific deliverables."], ["03", "Send for approval", "Share one private link so your client can record a decision."]].map(([number, title, text]) => <article className="rounded-2xl border border-[#e1e1d9] bg-white p-6 shadow-[0_6px_24px_rgba(39,54,48,0.04)]" key={number}><span className="font-[family-name:var(--font-editorial)] text-3xl italic text-[#176b55]">{number}</span><h3 className="mt-5 font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-[#696a63]">{text}</p></article>)}</div>
           <div className="mt-12 grid overflow-hidden rounded-2xl border border-[#deded6] bg-white shadow-[0_20px_60px_rgba(39,54,48,0.07)] lg:grid-cols-[0.84fr_1.16fr]"><div className="border-b border-[#e7e7df] bg-[#f2f3ed] p-7 lg:border-b-0 lg:border-r lg:p-9"><Eyebrow>New change request</Eyebrow><h3 className="mt-3 text-2xl font-semibold tracking-[-0.035em]">Put the whole decision in one place.</h3><p className="mt-3 text-sm leading-6 text-[#666760]">No long email thread. No pricing buried in chat. Just what your client needs.</p><div className="mt-8 space-y-4 text-sm">{["Describe the requested work", "List cost and timing impact", "Send a focused approval link"].map((item, index) => <div className="flex items-center gap-3" key={item}><span className="grid size-7 place-items-center rounded-full border border-[#cfded7] bg-white text-xs font-semibold text-[#176b55]">{index + 1}</span><b>{item}</b></div>)}</div></div><div className="p-6 sm:p-8 lg:p-9"><div className="grid gap-5 sm:grid-cols-2">{[["Project", "Website redesign"], ["Request title", "Analytics dashboard"], ["Additional cost", "$750"], ["Timeline impact", "5 business days"]].map(([label, value]) => <label className="text-xs font-semibold text-[#52534e]" key={label}>{label}<span className="mt-2 block rounded-lg border border-[#dcded6] bg-[#fafaf7] px-3.5 py-3 text-sm font-normal text-[#262722]">{value}</span></label>)}<label className="text-xs font-semibold text-[#52534e] sm:col-span-2">What is changing?<span className="mt-2 block min-h-20 rounded-lg border border-[#dcded6] bg-[#fafaf7] px-3.5 py-3 text-sm font-normal leading-6 text-[#676860]">Add customer reporting views, filters, and export functionality.</span></label></div></div></div>

@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/config/siteConfig";
 
 export const socialImageAlt =
-  "ScopeYes — clear scope changes and confident client approvals";
+  "ScopeYes client approval and scope change software for freelancers";
 
 export const socialImageSize = {
   width: 1200,
