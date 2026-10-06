@@ -1,8 +1,7 @@
-import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { siteConfig } from "@/config/siteConfig";
+import { PublicFooter } from "@/components/marketing/public-footer";
+import { PublicHeader } from "@/components/marketing/public-header";
 
 type TableOfContentsItem = {
   href: `#${string}`;
@@ -17,17 +16,6 @@ type LegalPageShellProps = {
   tableOfContents: readonly TableOfContentsItem[];
   title: string;
 };
-
-function Brand() {
-  return (
-    <span className="inline-flex items-center gap-2.5 font-semibold tracking-[-0.02em]">
-      <span className="grid size-7 place-items-center rounded-lg bg-[#176b55] text-white">
-        <FileCheck2 aria-hidden="true" className="size-4" />
-      </span>
-      {siteConfig.name}
-    </span>
-  );
-}
 
 export function LegalPageShell({
   children,
@@ -46,25 +34,7 @@ export function LegalPageShell({
         Skip to legal content
       </a>
 
-      <header className="border-b border-[#e3e3dc] bg-[#f8f8f4]/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6">
-          <Link
-            aria-label={`${siteConfig.name} home`}
-            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176b55] focus-visible:ring-offset-4"
-            href="/"
-          >
-            <Brand />
-          </Link>
-
-          <Link
-            className="inline-flex items-center gap-2 rounded-md text-sm font-medium text-[#62635d] transition-colors hover:text-[#176b55] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176b55] focus-visible:ring-offset-4"
-            href="/"
-          >
-            <ArrowLeft aria-hidden="true" className="size-4" />
-            Back to home
-          </Link>
-        </div>
-      </header>
+      <PublicHeader />
 
       <main id="legal-content">
         <section className="border-b border-[#e3e3dc] bg-white">
@@ -88,7 +58,7 @@ export function LegalPageShell({
           <aside className="hidden lg:block">
             <nav
               aria-label={`${title} table of contents`}
-              className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto pr-4"
+              className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-4"
             >
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#85867e]">
                 On this page
@@ -112,45 +82,7 @@ export function LegalPageShell({
         </div>
       </main>
 
-      <footer className="border-t border-[#deded6] bg-[#f2f2ec]">
-        <div className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6">
-          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-start">
-            <div>
-              <Brand />
-              <p className="mt-2 text-sm text-[#6e6f68]">
-                Clear scope. Confident approvals.
-              </p>
-            </div>
-            <nav
-              aria-label="Legal footer navigation"
-              className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#62635d]"
-            >
-              <Link className="hover:text-[#176b55]" href="/">
-                Home
-              </Link>
-              <Link className="hover:text-[#176b55]" href="/sign-in">
-                Sign in
-              </Link>
-              <Link className="hover:text-[#176b55]" href="/privacy">
-                Privacy Policy
-              </Link>
-              <Link className="hover:text-[#176b55]" href="/terms">
-                Terms of Service
-              </Link>
-            </nav>
-          </div>
-          <div className="mt-9 flex flex-col justify-between gap-3 border-t border-[#deded6] pt-6 text-xs text-[#85867e] sm:flex-row">
-            <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-            <a
-              className="inline-flex items-center gap-1.5 hover:text-[#176b55]"
-              href={`mailto:${siteConfig.supportEmail}`}
-            >
-              <Mail aria-hidden="true" className="size-3.5" />
-              {siteConfig.supportEmail}
-            </a>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

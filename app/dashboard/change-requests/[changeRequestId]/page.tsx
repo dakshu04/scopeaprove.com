@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/auth-session";
 import { cn } from "@/lib/utils";
 import { prisma } from "@/lib/prisma";
 import { PublishChangeRequest } from "@/components/change-requests/publish-change-request";
+import { synchronizeExpiredChangeRequests } from "@/lib/change-request-expiration";
 
 
 type ChangeRequestPageProps = {
@@ -67,6 +68,8 @@ export default async function ChangeRequestPage({
 }: ChangeRequestPageProps) {
   const user = await requireUser();
   const { changeRequestId } = await params;
+
+  await synchronizeExpiredChangeRequests(user.id);
 
   const changeRequest = await prisma.changeRequest.findFirst({
     where: {
@@ -196,6 +199,8 @@ export default async function ChangeRequestPage({
             <PublishChangeRequest
                 changeRequestId={changeRequest.id}
                 status={changeRequest.status}
+                clientEmail={changeRequest.project.clientEmail}
+                requestTitle={changeRequest.title}
             />
             )}
           {changeRequest.approval && (
@@ -237,6 +242,14 @@ export default async function ChangeRequestPage({
                   </div>
                 )}
               </dl>
+              <div className="border-t border-border px-5 py-4">
+                <Link
+                  href={`/dashboard/change-requests/${changeRequest.id}/record`}
+                  className="text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                >
+                  Open printable approval record
+                </Link>
+              </div>
             </section>
           )}
         </div>

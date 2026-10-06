@@ -1,7 +1,12 @@
+const rawSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.SITE_URL ??
+  "https://www.scopeyes.com";
+
 export const siteConfig = {
   name: "ScopeYes",
   shortName: "ScopeYes",
-  url: "https://www.scopeyes.com",
+  url: rawSiteUrl.replace(/\/$/, ""),
   description:
     "Client approval and scope change software for freelancers and small teams. Document extra work, price and timeline impact, then get approval before work begins.",
   supportEmail: "scopeyescontact@gmail.com",

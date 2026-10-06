@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { ApprovalDecisionForm } from "@/components/approval/approval-decision-form";
 import { prisma } from "@/lib/prisma";
 import { hashPublicToken } from "@/lib/public-token";
+import { getEffectiveChangeRequestStatus } from "@/lib/change-request-status";
 
 type ApprovalPageProps = {
   params: Promise<{
@@ -87,10 +88,8 @@ export default async function ApprovalPage({
     notFound();
   }
 
-  const isExpired =
-    changeRequest.status === "EXPIRED" ||
-    (changeRequest.expiresAt !== null &&
-      changeRequest.expiresAt <= new Date());
+  const effectiveStatus = getEffectiveChangeRequestStatus(changeRequest);
+  const isExpired = effectiveStatus === "EXPIRED";
   const canDecide =
     !isExpired &&
     changeRequest.status === "PENDING" &&

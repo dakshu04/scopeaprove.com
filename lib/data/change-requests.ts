@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { synchronizeExpiredChangeRequests } from "@/lib/change-request-expiration";
 import type { ChangeRequestStatus } from "@/src/generated/prisma/enums";
 
 type ChangeRequestWorkspaceInput = {
@@ -15,6 +16,8 @@ export async function getChangeRequestWorkspace(
   userId: string,
   input: ChangeRequestWorkspaceInput,
 ) {
+  await synchronizeExpiredChangeRequests(userId);
+
   const where = {
     project: {
       userId,
@@ -107,6 +110,8 @@ export async function getChangeRequestWorkspace(
 }
 
 export async function getChangeRequests(userId: string) {
+  await synchronizeExpiredChangeRequests(userId);
+
   return prisma.changeRequest.findMany({
     where: {
       project: {

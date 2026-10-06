@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { LegalPageShell } from "@/components/legal/legal-page-shell";
+import { AnalyticsPreferencesButton } from "@/components/analytics/google-analytics-consent";
 import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
 const pageUrl = absoluteUrl("/privacy");
-const lastUpdated = "September 29, 2026";
+const lastUpdated = "October 6, 2026";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy | ScopeYes" },
@@ -47,7 +48,7 @@ const structuredData = {
   description:
     "How ScopeYes handles information used for project scope, change request, client approval, authentication, and subscription features.",
   url: pageUrl,
-  dateModified: "2026-09-29",
+  dateModified: "2026-10-06",
   isPartOf: {
     "@type": "WebSite",
     name: siteConfig.name,
@@ -236,14 +237,21 @@ export default function PrivacyPage() {
         <h2>5. Does ScopeYes use cookies?</h2>
         <p className="answer">
           Yes. ScopeYes uses essential authentication and session technologies
-          so sign-in works securely and the application can recognize an active
-          session.
+          so sign-in works securely, and it offers optional analytics on public
+          pages to help us understand and improve the website.
         </p>
         <p>
-          These technologies are required for core account functionality. The
-          current ScopeYes application does not include a third-party analytics
-          or advertising tracker. If that changes, this policy will be updated
-          to explain the relevant technology and choices.
+          Essential technologies are required for core account functionality.
+          If you choose “Allow analytics,” Google Analytics may process device,
+          browser, approximate-location, referral, and interaction information
+          under Google’s terms and privacy practices. Choosing “Essential only”
+          prevents ScopeYes from loading Google Analytics. ScopeYes also uses
+          Vercel Analytics and Speed Insights for aggregated website performance
+          and usage measurements. ScopeYes does not use these tools to sell
+          project or approval content for advertising.
+        </p>
+        <p>
+          <AnalyticsPreferencesButton />
         </p>
       </section>
 

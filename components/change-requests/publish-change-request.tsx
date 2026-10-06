@@ -4,7 +4,7 @@ import {
   useActionState,
   useState,
 } from "react";
-import { Check, Copy, Link2 } from "lucide-react";
+import { Check, Copy, Link2, Mail, Share2 } from "lucide-react";
 
 import {
   publishChangeRequest,
@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 type PublishChangeRequestProps = {
   changeRequestId: string;
   status: "DRAFT" | "PENDING";
+  clientEmail?: string | null;
+  requestTitle: string;
 };
 
 const initialState: PublishChangeRequestState = {};
@@ -23,6 +25,8 @@ const initialState: PublishChangeRequestState = {};
 export function PublishChangeRequest({
   changeRequestId,
   status,
+  clientEmail,
+  requestTitle,
 }: PublishChangeRequestProps) {
   const publishThisChangeRequest =
     publishChangeRequest.bind(null, changeRequestId);
@@ -50,6 +54,32 @@ export function PublishChangeRequest({
       setCopied(false);
     }
   }
+
+  async function shareApprovalLink() {
+    if (!approvalUrl) {
+      return;
+    }
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Review: ${requestTitle}`,
+          text: "Please review this ScopeYes change request and record your decision.",
+          url: approvalUrl,
+        });
+      } catch {
+        // Closing the native share sheet is an intentional, non-error outcome.
+      }
+
+      return;
+    }
+
+    await copyApprovalLink();
+  }
+
+  const emailSubject = `Approval requested: ${requestTitle}`;
+  const emailBody = `Please review this change request and record your decision:\n\n${approvalUrl}\n\nThis private link expires in 14 days.`;
+  const emailHref = `mailto:${clientEmail ? encodeURIComponent(clientEmail) : ""}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
   return (
     <section className="overflow-hidden rounded-xl border border-primary/15 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
@@ -136,6 +166,20 @@ export function PublishChangeRequest({
                   </>
                 )}
               </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Button type="button" variant="outline" onClick={shareApprovalLink}>
+                <Share2 aria-hidden="true" />
+                Share
+              </Button>
+              <a
+                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-border bg-background px-2.5 text-sm font-medium shadow-xs transition-colors hover:bg-muted"
+                href={emailHref}
+              >
+                <Mail className="size-4" aria-hidden="true" />
+                Email client
+              </a>
             </div>
 
             {state.message && (

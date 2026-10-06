@@ -2,12 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import "lenis/dist/lenis.css";
 
-import { siteConfig } from "@/config/siteConfig";
+import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 import "./globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalyticsConsent } from "@/components/analytics/google-analytics-consent";
 
 const defaultTitle =
   "Scope Change & Client Approval Software for Freelancers | ScopeYes";
@@ -69,12 +69,14 @@ export const metadata: Metadata = {
     title: defaultTitle,
     description: siteConfig.description,
     url: "/",
+    images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630 }],
   },
 
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: siteConfig.description,
+    images: [absoluteUrl("/twitter-image")],
   },
 
   verification: {
@@ -126,7 +128,7 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         {googleAnalyticsId ? (
-          <GoogleAnalytics gaId={googleAnalyticsId} />
+          <GoogleAnalyticsConsent gaId={googleAnalyticsId} />
         ) : null}
       </body>
     </html>

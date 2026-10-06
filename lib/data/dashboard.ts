@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { synchronizeExpiredChangeRequests } from "@/lib/change-request-expiration";
 
 type DashboardDataInput = {
   page: number;
@@ -9,6 +10,8 @@ export async function getDashboardData(
   userId: string,
   input: DashboardDataInput,
 ) {
+  await synchronizeExpiredChangeRequests(userId);
+
   const [projects, pending, approved, declined] = await Promise.all([
     prisma.project.count({
       where: {

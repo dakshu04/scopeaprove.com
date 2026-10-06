@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { synchronizeExpiredChangeRequests } from "@/lib/change-request-expiration";
 
 export const FREE_PROJECT_LIMIT = 1;
 export const FREE_ACTIVE_CHANGE_REQUEST_LIMIT = 3;
@@ -17,7 +18,9 @@ export async function getBillingEntitlements(userId: string) {
     throw new Error("Missing DODO_PAYMENTS_PRODUCT_ID.");
   }
 
-  const subscription = await prisma.subscription.findUnique({
+  const [, subscription] = await Promise.all([
+    synchronizeExpiredChangeRequests(userId),
+    prisma.subscription.findUnique({
     where: {
       userId,
     },
@@ -29,7 +32,8 @@ export async function getBillingEntitlements(userId: string) {
       nextBillingDate: true,
       cancelledAt: true,
     },
-  });
+    }),
+  ]);
 
   const isPro =
     subscription?.status === "ACTIVE" &&

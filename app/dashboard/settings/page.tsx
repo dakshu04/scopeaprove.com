@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   CreditCard,
+  Download,
   FileText,
   FolderKanban,
   Mail,
@@ -208,6 +209,27 @@ export default async function SettingsPage() {
             Your workspace uses Google authentication. Client approval
             links remain private and token-protected.
           </p>
+        </div>
+      </section>
+
+      <section className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-[0_10px_30px_rgba(31,49,42,0.04)]">
+        <div className="border-b border-border/80 px-5 py-4">
+          <h2 className="text-sm font-semibold">Your data</h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Download a JSON copy of your profile, projects, scope, requests, and client decisions.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs leading-5 text-muted-foreground">
+            Authentication secrets, session tokens, and payment-card data are never included.
+          </p>
+          <a
+            className={buttonVariants({ variant: "outline", size: "sm", className: "shrink-0" })}
+            href="/api/account/export"
+          >
+            <Download aria-hidden="true" />
+            Export data
+          </a>
         </div>
       </section>
     </div>
