@@ -30,7 +30,7 @@ export function ProCheckoutButton({
       });
 
       if (response.status === 401) {
-        router.push("/sign-in");
+        router.push("/sign-in?next=checkout");
         return;
       }
 

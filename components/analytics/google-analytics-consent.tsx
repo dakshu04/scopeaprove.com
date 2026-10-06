@@ -34,7 +34,8 @@ export function GoogleAnalyticsConsent({ gaId }: { gaId: string }) {
   const isPrivateSurface =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/approve") ||
-    pathname.startsWith("/sign-in");
+    pathname.startsWith("/sign-in") ||
+    pathname.startsWith("/checkout");
 
   function saveConsent(value: Exclude<ConsentState, null>) {
     window.localStorage.setItem(CONSENT_KEY, value);

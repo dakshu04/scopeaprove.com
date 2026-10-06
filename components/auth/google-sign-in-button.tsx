@@ -5,7 +5,11 @@ import { ArrowRight, Loader2, TriangleAlert } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
 
-export function GoogleSignInButton() {
+export function GoogleSignInButton({
+  callbackURL = "/dashboard",
+}: {
+  callbackURL?: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -16,7 +20,7 @@ export function GoogleSignInButton() {
 
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL,
       });
     } catch (error) {
       console.error("Google sign-in failed:", error);

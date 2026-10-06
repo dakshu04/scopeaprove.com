@@ -3,7 +3,13 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
 export default function robots(): MetadataRoute.Robots {
-  const privatePaths = ["/api/", "/approve/", "/dashboard/", "/sign-in"];
+  const privatePaths = [
+    "/api/",
+    "/approve/",
+    "/checkout/",
+    "/dashboard/",
+    "/sign-in",
+  ];
 
   return {
     rules: [

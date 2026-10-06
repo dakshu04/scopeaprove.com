@@ -63,6 +63,10 @@ const nextConfig: NextConfig = {
         headers: privatePageHeaders,
       },
       {
+        source: "/checkout/:path*",
+        headers: privatePageHeaders,
+      },
+      {
         source: "/dashboard/:path*",
         headers: privatePageHeaders,
       },

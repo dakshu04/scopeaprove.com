@@ -29,7 +29,13 @@ const trustPoints = [
   { icon: Clock3, label: "Ready in seconds" },
 ];
 
-export default function SignInPage() {
+export default async function SignInPage({
+  searchParams,
+}: PageProps<"/sign-in">) {
+  const params = await searchParams;
+  const callbackURL =
+    params.next === "checkout" ? "/checkout/start" : "/dashboard";
+
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(213,235,225,0.72),transparent_34%),linear-gradient(180deg,#fafbf9_0%,#f1f5f2_100%)] text-foreground">
       <header className="relative z-20 h-16 border-b border-border/70 bg-white/65 backdrop-blur-xl">
@@ -173,7 +179,7 @@ export default function SignInPage() {
               </p>
 
               <div className="mt-7 rounded-2xl border border-border/80 bg-[#fbfcfb] p-2 shadow-[0_12px_32px_rgba(31,49,42,0.06)]">
-                <GoogleSignInButton />
+                <GoogleSignInButton callbackURL={callbackURL} />
               </div>
 
               <div className="mt-5 grid grid-cols-3 gap-2">
