@@ -1,0 +1,145 @@
+import {
+  MdxActions,
+  MdxCallout,
+  MdxCard,
+  MdxCardGrid,
+  MdxDefinition,
+  MdxDefinitionGrid,
+  MdxEmail,
+  MdxFaqList,
+  MdxFinalCta,
+  MdxSection,
+  MdxTemplate,
+} from "@/components/marketing/mdx-article"
+import { clientChangeRequestFaqs } from "./client-change-request-template-data"
+
+<MdxSection>
+  <MdxCallout>
+    **A client change request** is a short written record of work added after the original scope was agreed. It should show what is changing, why it is additional, what it costs, how it affects delivery, and what the client must approve.
+
+    <MdxActions
+      primaryHref="/templates/client-change-request.txt"
+      primaryLabel="Download the free template"
+      secondaryHref="/sign-in"
+      secondaryLabel="Create an approval link"
+    />
+  </MdxCallout>
+</MdxSection>
+
+<MdxSection>
+## Copy-and-paste change request template
+
+Replace the bracketed details, remove fields that do not apply, and keep the language specific enough that both sides know exactly what will happen after approval.
+
+<MdxTemplate>{`Project: [Project name]
+Client: [Client name]
+Change request: [Short descriptive title]
+
+Requested change
+[Describe the additional work in plain language.]
+
+Original scope reference
+[State what the original agreement included and why this request is additional.]
+
+Deliverables included in this change
+- [Deliverable one]
+- [Deliverable two]
+- [Any exclusions or assumptions]
+
+Additional price
+[Amount and currency, plus applicable tax or payment terms]
+
+Schedule impact
+[No change / adds X business days / revised delivery date]
+
+Approval
+Please approve this change before work begins. Approval confirms the additional work, price, and schedule impact described above.
+
+Decision: [Approved / Changes requested]
+Client name: [Name]
+Decision date: [Date]`}</MdxTemplate>
+</MdxSection>
+
+<MdxSection>
+## When should a freelancer use it?
+
+<MdxCardGrid>
+  <MdxCard title="New deliverable" description="A client adds another page, feature, asset, integration, or service." />
+  <MdxCard title="Extra revisions" description="Feedback goes beyond the revision rounds included in the agreement." />
+  <MdxCard title="Changed requirements" description="A previously approved requirement is replaced or expanded." />
+  <MdxCard title="Rush work" description="The client asks for a faster deadline that changes your schedule or fee." />
+  <MdxCard title="New stakeholder" description="A late stakeholder introduces feedback that creates additional work." />
+  <MdxCard title="Expanded handoff" description="The client requests source files, training, support, or formats not included." />
+</MdxCardGrid>
+</MdxSection>
+
+<MdxSection>
+## Worked example: an extra landing page
+
+Imagine a freelance designer agreed to deliver a five-page website. During development, the client asks for a separate campaign landing page with a form and analytics tracking.
+
+<MdxDefinitionGrid>
+  <MdxDefinition term="Requested change" value="Design and build one campaign landing page with a lead form and analytics events." />
+  <MdxDefinition term="Why it is additional" value="The accepted proposal includes five named pages; this campaign page is a sixth deliverable." />
+  <MdxDefinition accent term="Additional price" value="$650" />
+  <MdxDefinition term="Schedule impact" value="+4 business days" />
+</MdxDefinitionGrid>
+</MdxSection>
+
+<MdxSection>
+## How to price the additional work
+
+Use the same pricing method you use for normal project work, then account for coordination, testing, revisions, and schedule disruption—not only the visible production task.
+
+### Fixed price
+
+Best when the added deliverables and revision allowance can be defined clearly.
+
+### Hourly estimate
+
+Useful when the requirement is uncertain. State the estimated range, rate, and approval needed before exceeding it.
+
+### Rush fee
+
+Appropriate when the requested deadline requires rescheduling other committed work.
+</MdxSection>
+
+<MdxSection>
+## Short email to send with the request
+
+<MdxEmail>
+  **Subject:** Approval needed: additional work for [Project name]
+
+  Hi [Client name],
+
+  I’m happy to help with [requested change]. Because this sits outside the currently agreed scope, I’ve documented the additional work, price, and schedule impact for you to review.
+
+  Please review the change request here: [approval link]
+
+  Once it is approved, I’ll add the work to the project schedule.
+
+  Thanks,<br />[Your name]
+</MdxEmail>
+</MdxSection>
+
+<MdxSection>
+## Common mistakes to avoid
+
+- **Starting before approval:** urgency can turn an unapproved request into unpaid work.
+- **Using vague descriptions:** “website updates” does not define what is included or excluded.
+- **Showing only the price:** include delivery impact and assumptions so the full tradeoff is visible.
+- **Sounding accusatory:** describe the difference from the original scope calmly and factually.
+- **Keeping approval in scattered messages:** store the request and decision together.
+</MdxSection>
+
+<MdxSection>
+## Frequently asked questions
+
+<MdxFaqList items={clientChangeRequestFaqs} />
+</MdxSection>
+
+<MdxFinalCta title="Turn the template into a client-ready approval link.">
+  <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
+    ScopeYes keeps the original scope, added work, price, schedule impact, and final client decision together in one record.
+  </p>
+</MdxFinalCta>
