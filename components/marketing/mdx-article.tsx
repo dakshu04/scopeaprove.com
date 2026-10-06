@@ -108,13 +108,13 @@ export function MdxFaqList({ items }: { items: readonly FaqItem[] }) {
   );
 }
 
-export function MdxFinalCta({ children, title }: { children: ReactNode; title: string }) {
+export function MdxFinalCta({ description, title }: { description: string; title: string }) {
   return (
     <section className="py-12 sm:py-16">
       <div className="overflow-hidden rounded-3xl bg-[#173e33] p-6 text-white shadow-[0_24px_65px_rgba(23,62,51,0.18)] sm:p-9">
         <Send aria-hidden="true" className="size-5 text-[#a9e5cc]" />
         <h2 className="mt-5 text-2xl font-semibold tracking-[-0.035em] text-white sm:text-3xl">{title}</h2>
-        {children}
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">{description}</p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#a9e5cc] px-4 py-2.5 text-sm font-semibold text-[#173e33]" href="/sign-in">
             Create your free request

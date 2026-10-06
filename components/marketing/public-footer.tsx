@@ -53,6 +53,24 @@ export function PublicFooter() {
               <Mail aria-hidden="true" className="size-4" />
               {siteConfig.supportEmail}
             </a>
+            <a
+              aria-label="View ScopeYes on LaunchOnIt"
+              className="mt-6 block w-fit rounded-sm outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-[#176b55] focus-visible:ring-offset-4"
+              href="https://launchon.it/products/scopeyes"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {/* The provider serves this badge as a live SVG, so a native image preserves it without proxying. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt="ScopeYes featured on LaunchOnIt"
+                decoding="async"
+                height="48"
+                loading="lazy"
+                src="https://launchon.it/api/badge/scopeyes?theme=light&size=md&type=featured"
+                width="164"
+              />
+            </a>
           </div>
 
           {groups.map((group) => (
