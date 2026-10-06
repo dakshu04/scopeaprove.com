@@ -11,6 +11,7 @@ const productLinks = [
 ] as const;
 
 const publicLinks = [
+  { href: "/guides/client-change-request-template", label: "Free template" },
   { href: "/guides/scope-creep", label: "Scope creep guide" },
   { href: "/about", label: "About" },
   { href: "/security", label: "Security" },
@@ -40,8 +41,8 @@ export function PublicHeader() {
               {item.label}
             </Link>
           ))}
-          <Link className="transition-colors hover:text-[#176b55]" href="/guides/scope-creep">
-            Guide
+          <Link className="transition-colors hover:text-[#176b55]" href="/guides/client-change-request-template">
+            Free template
           </Link>
           <Link className="transition-colors hover:text-[#176b55]" href="/about">
             About

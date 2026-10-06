@@ -151,6 +151,12 @@ export default function ScopeCreepGuidePage() {
             <p><strong>Schedule impact:</strong> [Extra days or new delivery date]</p>
             <p><strong>Decision:</strong> Approve the change or request revisions before work begins.</p>
           </div>
+          <Link
+            className="mt-5 inline-flex text-sm font-semibold text-[#176b55] hover:underline"
+            href="/guides/client-change-request-template"
+          >
+            Get the complete free client change request template
+          </Link>
         </section>
 
         <section className={sectionClass}>

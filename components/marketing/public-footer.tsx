@@ -17,6 +17,7 @@ const groups = [
   {
     title: "Explore",
     links: [
+      { href: "/guides/client-change-request-template", label: "Free change request template" },
       { href: "/guides/scope-creep", label: "Scope creep guide" },
       { href: "/about", label: "About ScopeYes" },
       { href: "/contact", label: "Contact" },
