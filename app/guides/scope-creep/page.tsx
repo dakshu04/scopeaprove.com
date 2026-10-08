@@ -157,6 +157,12 @@ export default function ScopeCreepGuidePage() {
           >
             Get the complete free client change request template
           </Link>
+          <p className="mt-4 text-sm leading-6 text-[#62645e]">
+            Starting a new project? Define the boundary first with the free{" "}
+            <Link className="font-semibold text-[#176b55] hover:underline" href="/guides/freelance-scope-of-work-template">
+              freelance scope of work template
+            </Link>.
+          </p>
         </section>
 
         <section className={sectionClass}>
