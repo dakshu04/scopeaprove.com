@@ -1,0 +1,16 @@
+{
+  "duration": 20,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#s1-headline", "bySec": 1.1 },
+    { "kind": "appearsBy", "selector": "#s2-panel", "bySec": 4.4 },
+    { "kind": "appearsBy", "selector": "#s3-card", "bySec": 9.6 },
+    { "kind": "appearsBy", "selector": "#s4-brand", "bySec": 18.3 },
+    { "kind": "before", "a": "#s1-eyebrow", "b": "#s1-card" },
+    { "kind": "before", "a": "#s2-field-1", "b": "#s2-field-5" },
+    { "kind": "staysInFrame", "selector": "#s1-card" },
+    { "kind": "staysInFrame", "selector": "#s2-panel" },
+    { "kind": "staysInFrame", "selector": "#s3-card" },
+    { "kind": "staysInFrame", "selector": "#s4-brand" },
+    { "kind": "keepsMoving", "withinSelector": "#root", "maxStaticSec": 2.2 }
+  ]
+}

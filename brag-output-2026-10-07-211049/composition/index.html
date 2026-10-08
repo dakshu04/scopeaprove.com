@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ScopeYes — Brag Film</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1920"
+      data-height="1080"
+      data-fps="30"
+    >
+      <div class="world" aria-hidden="true" data-layout-ignore>
+        <div class="world-grid"></div>
+        <div class="world-orb"></div>
+      </div>
+
+      <div class="top-rail" data-layout-ignore>
+        <span class="brand-mini">
+          <span class="brand-mini-mark">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 3.5h8l3 3V20H7z"></path>
+              <path d="M14.5 3.5V7H18"></path>
+              <path d="m9.5 13 1.7 1.7 3.6-4"></path>
+            </svg>
+          </span>
+          ScopeYes
+        </span>
+        <span class="rail-meta">Change request · recorded decision</span>
+      </div>
+
+      <section id="scene-1" class="clip" data-start="0" data-duration="3.27" data-track-index="0">
+        <div id="scene1-inner" class="scene-pad">
+          <div class="s1-layout">
+            <div class="s1-copy">
+              <p id="s1-eyebrow" class="eyebrow">Client approval software for freelancers</p>
+              <h1 id="s1-headline" class="s1-headline">Stop doing <span class="editorial">extra work</span> for free.</h1>
+              <p id="s1-sub" class="s1-sub">Turn a client request into a documented change—with the price, timeline, and decision visible before work begins.</p>
+              <span id="s1-rule" class="s1-rule"></span>
+            </div>
+            <article id="s1-card" class="mini-request ui-card">
+              <div class="mini-top">
+                <span class="request-id">SCOPEYES / CR-1048</span>
+                <span class="status-pill"><span class="status-dot"></span>Awaiting approval</span>
+              </div>
+              <h2>Add customer analytics dashboard</h2>
+              <p class="client-line">Northstar Labs · Website redesign</p>
+              <div class="scope-summary">Add monthly active user, conversion funnel, and retention cohort views before launch.</div>
+              <div class="impact-grid">
+                <div class="impact-cell"><span>Additional cost</span><strong>$750</strong></div>
+                <div class="impact-cell"><span>Timeline impact</span><strong>+5 days</strong></div>
+              </div>
+              <div class="mini-footer">
+                <span class="reviewing">Client reviewing</span>
+                <span class="mini-button">Approve request</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-2" class="clip" data-start="3.27" data-duration="5.47" data-track-index="0">
+        <div id="scene2-inner" class="scene-pad">
+          <div class="s2-layout">
+            <div id="s2-copy" class="s2-copy">
+              <p class="eyebrow">New change request</p>
+              <h2>Put the whole decision in <span class="editorial">one place.</span></h2>
+              <p>No long email thread. No pricing buried in chat. Just what your client needs.</p>
+              <div class="step-rail" aria-label="Three step request workflow"><span>1</span><span>2</span><span>3</span></div>
+            </div>
+            <article id="s2-panel" class="form-panel ui-card">
+              <div class="form-panel-top">
+                <div><p class="eyebrow">Request details</p><h3>Analytics dashboard</h3></div>
+                <div class="progress-shell">
+                  <div class="progress-label"><span>Ready to send</span><span>100%</span></div>
+                  <div class="progress-track"><span id="s2-progress-fill" class="progress-fill"></span></div>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div id="s2-field-1" class="form-field"><span class="form-label">Project</span><span class="form-value">Website redesign</span></div>
+                <div id="s2-field-2" class="form-field"><span class="form-label">Request title</span><span class="form-value">Analytics dashboard</span></div>
+                <div id="s2-field-3" class="form-field"><span class="form-label">Additional cost</span><span class="form-value">$750</span></div>
+                <div id="s2-field-4" class="form-field"><span class="form-label">Timeline impact</span><span class="form-value">5 business days</span></div>
+                <div id="s2-field-5" class="form-field wide"><span class="form-label">What is changing?</span><span class="form-value">Add customer reporting views, filters, and export functionality.</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-3" class="clip" data-start="8.74" data-duration="5.46" data-track-index="0">
+        <div id="scene3-inner" class="scene-pad">
+          <div class="s3-layout">
+            <article id="s3-card" class="review-card ui-card">
+              <div class="review-top">
+                <span class="request-id">SCOPEYES / CR-1048</span>
+                <span class="status-pill"><span class="status-dot"></span>Awaiting approval</span>
+              </div>
+              <div class="review-grid">
+                <div class="review-main">
+                  <h2>Add customer analytics dashboard</h2>
+                  <p class="client-line">Northstar Labs · Website redesign</p>
+                  <div class="review-description">Add an in-app overview for monthly active users, conversion funnels, and retention cohorts before launch.</div>
+                  <p class="deliverables-title">Deliverables included</p>
+                  <ul class="deliverables">
+                    <li>Analytics dashboard with date and segment filters</li>
+                    <li>Event metrics API integration</li>
+                    <li>Retention cohort view with CSV export</li>
+                  </ul>
+                </div>
+                <aside class="review-aside">
+                  <div class="review-impact">
+                    <div class="impact-cell"><span>Additional cost</span><strong>$750</strong></div>
+                    <div class="impact-cell"><span>Timeline impact</span><strong>+5 days</strong></div>
+                  </div>
+                  <div class="decision-box">
+                    <span class="decision-label">Final step</span>
+                    <h3>Your decision</h3>
+                    <p>Confirm the scope, cost, and schedule above.</p>
+                    <div class="decision-actions">
+                      <span class="decline-button">Decline</span>
+                      <span id="s3-approve" class="approve-button">
+                        <span id="s3-approve-label" data-layout-allow-overlap>Approve request</span>
+                        <span id="s3-approve-done" class="approve-done" data-layout-allow-overlap>
+                          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
+                          Approved
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div id="s3-ring-wrap" class="click-ring-wrap" aria-hidden="true" data-layout-ignore>
+          <span id="s3-ring-1" class="click-ring"></span><span id="s3-ring-2" class="click-ring"></span>
+        </div>
+        <div id="s3-cursor" class="cursor" aria-hidden="true" data-layout-ignore>
+          <svg viewBox="0 0 24 24"><path d="M5 3 5 19 9 15 12 22 15 20.5 11.5 14 18 14Z"></path></svg>
+        </div>
+      </section>
+
+      <section id="scene-4" class="clip" data-start="14.2" data-duration="5.8" data-track-index="0">
+        <div class="scene-pad">
+          <div class="s4-layout">
+            <div id="s4-approval-stage" class="approval-stage">
+              <div class="success-lockup">
+                <div id="s4-check" class="success-mark" aria-label="Success">
+                  <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27"></circle><path id="s4-check-path" d="M20 33.5l8 8L45 23"></path></svg>
+                </div>
+                <div id="s4-success-copy" class="success-copy">
+                  <h2>Approved — ready to move forward</h2>
+                  <p>The request, project impact, response, and timestamp stay together.</p>
+                </div>
+              </div>
+              <article id="s4-record" class="record-card ui-card">
+                <div class="record-top"><span class="record-label">Client decision record</span><span class="approved-pill">Approved</span></div>
+                <h3>Analytics dashboard</h3>
+                <div class="record-data">
+                  <div><span>Additional cost</span><strong>$750</strong></div>
+                  <div><span>Schedule impact</span><strong>+5 days</strong></div>
+                </div>
+                <p class="record-foot">Decision securely recorded for the project owner.</p>
+              </article>
+            </div>
+            <div id="s4-brand" class="brand-close">
+              <span id="s4-brand-mark" class="brand-close-mark">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h8l3 3V20H7z"></path><path d="M14.5 3.5V7H18"></path><path d="m9.5 13 1.7 1.7 3.6-4"></path></svg>
+              </span>
+              <h2>ScopeYes</h2>
+              <h3>A clear decision before work begins.</h3>
+              <span id="s4-brand-rule" class="brand-close-rule"></span>
+              <p>Control scope creep</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <audio id="music-bed" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="20" data-track-index="10" data-volume="0.32" data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.6,"v":1},{"t":18.56,"v":1},{"t":20,"v":0}]}]}'></audio>
+      <audio id="sfx-hook" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="0.56" data-track-index="11" data-volume="0.52"></audio>
+      <audio id="sfx-approve" src="assets/sfx/interface/click_003.ogg" data-start="13.11" data-track-index="12" data-volume="0.66"></audio>
+      <audio id="sfx-brand" src="assets/sfx/interface/bong_001.ogg" data-start="17.47" data-track-index="13" data-volume="0.58"></audio>
+    </div>
+    <script>
+      document.fonts.ready.then(function () {
+        const tl = gsap.timeline({ paused: true });
+
+        tl.fromTo(".world-grid", { x: -18, y: -10 }, { x: 18, y: 12, duration: 20, ease: "none" }, 0);
+        tl.fromTo(".world-orb", { scale: 0.96, rotation: -5 }, { scale: 1.08, rotation: 7, duration: 20, ease: "sine.inOut" }, 0);
+
+        tl.fromTo("#s1-eyebrow", { opacity: 0, x: -34 }, { opacity: 1, x: 0, duration: 0.46, ease: "power2.out" }, 0.2);
+        tl.fromTo("#s1-headline", { opacity: 0, y: 54, filter: "blur(9px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.72, ease: "power3.out" }, 0.34);
+        tl.fromTo("#s1-sub", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.52, ease: "expo.out" }, 0.9);
+        tl.fromTo("#s1-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.62, ease: "power2.out" }, 1.05);
+        tl.set("#s1-card", { opacity: 0 }, 0);
+        tl.set("#s1-card", { opacity: 1 }, 1.0);
+        tl.fromTo("#s1-card", { clipPath: "inset(0 0 0 100%)", x: 84, y: 26, rotationY: -7, transformPerspective: 1200 }, { clipPath: "inset(0 0 0 0%)", x: 0, y: 0, rotationY: 0, duration: 0.72, ease: "power4.out" }, 1.0);
+        tl.to("#s1-card", { y: -7, duration: 1.05, ease: "sine.inOut" }, 1.76);
+        tl.to("#scene1-inner", { opacity: 0, y: -24, duration: 0.28, ease: "power2.in" }, 2.96);
+
+        tl.fromTo("#s2-copy", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.64, ease: "power3.out", immediateRender: false }, 3.43);
+        tl.fromTo("#s2-panel", { opacity: 0, x: 88, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.72, ease: "expo.out", immediateRender: false }, 3.5);
+        tl.set(["#s2-field-1", "#s2-field-2", "#s2-field-3", "#s2-field-4", "#s2-field-5"], { opacity: 0 }, 3.27);
+        tl.fromTo("#s2-progress-fill", { scaleX: 0 }, { scaleX: 1, duration: 3.45, ease: "power1.inOut", immediateRender: false }, 4.08);
+        // beat-grid: readable fields at 4.39s, 5.34s, 6.56s, and 7.64s.
+        tl.fromTo("#s2-field-1", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out", immediateRender: false }, 4.39);
+        tl.fromTo("#s2-field-2", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out", immediateRender: false }, 5.34);
+        tl.fromTo("#s2-field-3", { opacity: 0, x: -26 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out", immediateRender: false }, 6.56);
+        tl.fromTo("#s2-field-4", { opacity: 0, x: 26 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, 6.56);
+        tl.fromTo("#s2-field-5", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 7.64);
+        tl.to("#scene2-inner", { opacity: 0, scale: 0.985, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 8.41);
+
+        // beat-locked: client review reveal at 8.74s.
+        tl.set(["#s3-card .review-main", "#s3-card .review-aside", "#s3-card .deliverables li", "#s3-cursor"], { opacity: 0 }, 8.74);
+        tl.fromTo("#s3-card", { opacity: 0, scale: 0.94, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.78, ease: "power4.out", immediateRender: false }, 8.74);
+        tl.fromTo("#s3-card .review-main", { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: 0.48, ease: "power3.out", immediateRender: false }, 9.26);
+        tl.fromTo("#s3-card .review-aside", { opacity: 0, x: 28 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out", immediateRender: false }, 9.5);
+        tl.fromTo("#s3-card .deliverables li", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.34, stagger: 0.18, ease: "power2.out", immediateRender: false }, 10.18);
+        tl.to("#s3-card", { y: -5, duration: 2.3, ease: "sine.inOut" }, 10.72);
+        tl.fromTo("#s3-cursor", { opacity: 0, x: 1740, y: 1010 }, { opacity: 1, x: 1388, y: 834, duration: 0.72, ease: "power3.out", immediateRender: false }, 12.22);
+        // beat-locked: approval press at 13.11s, adapted from press-ripple.
+        tl.to(["#s3-approve", "#s3-cursor"], { scale: 0.94, duration: 0.12, ease: "power1.in" }, 13.11);
+        tl.to(["#s3-approve", "#s3-cursor"], { scale: 1, duration: 0.34, ease: "back.out(1.7)" }, 13.24);
+        tl.fromTo("#s3-ring-1", { opacity: 0.72, scale: 0.45 }, { opacity: 0, scale: 2.6, duration: 0.34, ease: "power2.out", immediateRender: false }, 13.2);
+        tl.fromTo("#s3-ring-2", { opacity: 0.48, scale: 0.45 }, { opacity: 0, scale: 3.3, duration: 0.4, ease: "power2.out", immediateRender: false }, 13.27);
+        tl.to("#s3-approve-label", { opacity: 0, scale: 0.5, filter: "blur(3px)", duration: 0.24, ease: "power2.in" }, 13.2);
+        tl.fromTo("#s3-approve-done", { opacity: 0, scale: 0.5, filter: "blur(3px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.32, ease: "back.out(1.7)", immediateRender: false }, 13.3);
+        tl.to("#s3-cursor", { opacity: 0, x: 1680, y: 1010, duration: 0.42, ease: "power2.in" }, 13.52);
+
+        tl.set(["#s4-check svg", "#s4-success-copy", "#s4-record"], { opacity: 0 }, 14.2);
+        tl.set("#s4-check-path", { "--hf-check-dash": 36 }, 14.2);
+        tl.fromTo("#s4-check svg", { opacity: 0, "--hf-check-scale": 0.72, "--hf-check-rotate": "-18deg", "--hf-check-blur": "7px" }, { opacity: 1, "--hf-check-scale": 1, "--hf-check-rotate": "0deg", "--hf-check-blur": "0px", duration: 0.38, ease: "back.out(1.8)", immediateRender: false }, 14.34);
+        tl.fromTo("#s4-check-path", { "--hf-check-dash": 36 }, { "--hf-check-dash": 0, duration: 0.44, ease: "power2.out", immediateRender: false }, 14.47);
+        tl.fromTo("#s4-success-copy", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.54, ease: "power3.out", immediateRender: false }, 14.55);
+        tl.fromTo("#s4-record", { opacity: 0, x: 52, rotationY: -5, transformPerspective: 1200 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.68, ease: "expo.out", immediateRender: false }, 14.86);
+        tl.to("#s4-check", { scale: 1.035, duration: 1.15, ease: "sine.inOut" }, 15.35);
+        tl.to("#s4-approval-stage", { opacity: 0, y: -24, filter: "blur(10px)", duration: 0.38, ease: "power2.in" }, 16.94);
+        // beat-locked: final ScopeYes lockup at 17.47s.
+        tl.fromTo("#s4-brand", { opacity: 0, xPercent: -50, yPercent: -47, scale: 0.965, filter: "blur(10px)" }, { opacity: 1, xPercent: -50, yPercent: -50, scale: 1, filter: "blur(0px)", duration: 0.64, ease: "power4.out", immediateRender: false }, 17.47);
+        tl.fromTo("#s4-brand-mark", { rotation: -8, scale: 0.82 }, { rotation: 0, scale: 1, duration: 0.52, ease: "back.out(1.55)", immediateRender: false }, 17.47);
+        tl.fromTo("#s4-brand-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.62, ease: "power2.out", immediateRender: false }, 17.82);
+        tl.to("#s4-brand", { yPercent: -50.6, duration: 1.65, ease: "sine.inOut" }, 18.28);
+
+        window.__timelines["main"] = tl;
+        if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+      });
+    </script>
+  </body>
+</html>
