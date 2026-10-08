@@ -9,6 +9,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalyticsConsent } from "@/components/analytics/google-analytics-consent";
 
+const defaultGoogleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+
 const defaultTitle =
   "Scope Change & Client Approval Software for Freelancers | ScopeYes";
 
@@ -115,7 +117,7 @@ export default function RootLayout({
   children,
 }: LayoutProps<"/">) {
   const googleAnalyticsId =
-    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || defaultGoogleAnalyticsId;
 
   return (
     <html
