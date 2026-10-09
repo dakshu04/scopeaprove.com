@@ -8,6 +8,21 @@ const CONSENT_KEY = "scopeyes_analytics_consent";
 
 type ConsentState = "granted" | "denied" | null;
 
+type GoogleTagWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+};
+
+function updateGoogleConsent(value: Exclude<ConsentState, null>) {
+  const analyticsStorage = value === "granted" ? "granted" : "denied";
+
+  (window as GoogleTagWindow).gtag?.("consent", "update", {
+    analytics_storage: analyticsStorage,
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+}
+
 function readConsent(): ConsentState {
   const value = window.localStorage.getItem(CONSENT_KEY);
   return value === "granted" || value === "denied" ? value : null;
@@ -39,6 +54,16 @@ export function GoogleAnalyticsConsent({ gaId }: { gaId: string }) {
 
   function saveConsent(value: Exclude<ConsentState, null>) {
     window.localStorage.setItem(CONSENT_KEY, value);
+    updateGoogleConsent(value);
+
+    if (value === "granted") {
+      (window as GoogleTagWindow).gtag?.("event", "page_view", {
+        page_location: window.location.href,
+        page_path: `${window.location.pathname}${window.location.search}`,
+        page_title: document.title,
+      });
+    }
+
     window.dispatchEvent(new Event("scopeyes-consent-changed"));
   }
 
@@ -48,7 +73,7 @@ export function GoogleAnalyticsConsent({ gaId }: { gaId: string }) {
 
   return (
     <>
-      {consent === "granted" ? <GoogleAnalytics gaId={gaId} /> : null}
+      <GoogleAnalytics gaId={gaId} />
 
       {consent === null ? (
         <aside
@@ -87,6 +112,7 @@ export function GoogleAnalyticsConsent({ gaId }: { gaId: string }) {
 export function AnalyticsPreferencesButton() {
   function reopenPreferences() {
     window.localStorage.removeItem(CONSENT_KEY);
+    updateGoogleConsent("denied");
     window.dispatchEvent(new Event("scopeyes-consent-changed"));
   }
 

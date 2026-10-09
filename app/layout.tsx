@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
+import Script from "next/script";
 import "lenis/dist/lenis.css";
 
 import { absoluteUrl, siteConfig } from "@/config/siteConfig";
@@ -9,7 +10,24 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalyticsConsent } from "@/components/analytics/google-analytics-consent";
 
-const defaultGoogleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+const googleAnalyticsId = "G-GN0Z9CBMHM";
+
+const googleConsentBootstrap = `
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+window.gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});
+try {
+  if (window.localStorage.getItem('scopeyes_analytics_consent') === 'granted') {
+    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  }
+} catch (_) {}
+`;
 
 const defaultTitle =
   "Scope Change & Client Approval Software for Freelancers | ScopeYes";
@@ -116,22 +134,20 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: LayoutProps<"/">) {
-  const googleAnalyticsId =
-    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || defaultGoogleAnalyticsId;
-
   return (
     <html
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <Script id="google-consent-default" strategy="beforeInteractive">
+        {googleConsentBootstrap}
+      </Script>
       <body className="min-h-full flex flex-col">
         {children}
 
         <Analytics />
         <SpeedInsights />
-        {googleAnalyticsId ? (
-          <GoogleAnalyticsConsent gaId={googleAnalyticsId} />
-        ) : null}
+        <GoogleAnalyticsConsent gaId={googleAnalyticsId} />
       </body>
     </html>
   );
