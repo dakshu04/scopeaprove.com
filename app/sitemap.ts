@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: absoluteUrl("/guides/client-asking-for-extra-work"),
+      lastModified: "2026-10-10",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/guides/client-change-request-template"),
       lastModified: "2026-10-07",
       changeFrequency: "monthly",

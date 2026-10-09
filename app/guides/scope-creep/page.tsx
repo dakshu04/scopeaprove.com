@@ -138,6 +138,12 @@ export default function ScopeCreepGuidePage() {
               </li>
             ))}
           </ol>
+          <p className="mt-6 text-sm leading-6 text-[#62645e]">
+            For ready-to-use wording and pricing options, read{" "}
+            <Link className="font-semibold text-[#176b55] hover:underline" href="/guides/client-asking-for-extra-work">
+              what to say when a client asks for extra work
+            </Link>.
+          </p>
         </section>
 
         <section className={sectionClass}>

@@ -29,6 +29,7 @@ ScopeYes is a web application for freelancers, consultants, agencies, and small 
 ## Official pages
 
 - Product: ${absoluteUrl("/")}
+- When a client asks for extra work: ${absoluteUrl("/guides/client-asking-for-extra-work")}
 - Freelance scope of work template: ${absoluteUrl("/guides/freelance-scope-of-work-template")}
 - Client change request template: ${absoluteUrl("/guides/client-change-request-template")}
 - Scope creep guide: ${absoluteUrl("/guides/scope-creep")}

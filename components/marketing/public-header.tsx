@@ -11,6 +11,7 @@ const productLinks = [
 ] as const;
 
 const publicLinks = [
+  { href: "/guides/client-asking-for-extra-work", label: "Extra work guide" },
   { href: "/guides/freelance-scope-of-work-template", label: "Scope of work" },
   { href: "/guides/client-change-request-template", label: "Free template" },
   { href: "/guides/scope-creep", label: "Scope creep guide" },
