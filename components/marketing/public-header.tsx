@@ -8,9 +8,12 @@ const productLinks = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#features", label: "Features" },
   { href: "/#pricing", label: "Pricing" },
+  { href: "/freelance-hourly-rate-calculator", label: "Free calculator" },
 ] as const;
 
 const publicLinks = [
+  { href: "/freelance-hourly-rate-calculator", label: "Hourly rate calculator" },
+  { href: "/scope-creep-cost-calculator", label: "Scope creep calculator" },
   { href: "/guides/client-asking-for-extra-work", label: "Extra work guide" },
   { href: "/guides/freelance-scope-of-work-template", label: "Scope of work" },
   { href: "/guides/client-change-request-template", label: "Free template" },

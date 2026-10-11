@@ -17,6 +17,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: absoluteUrl("/scope-creep-cost-calculator"),
+      lastModified: "2026-10-11",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/freelance-hourly-rate-calculator"),
+      lastModified: "2026-10-11",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/guides/scope-creep"),
       lastModified: "2026-10-06",
       changeFrequency: "monthly",

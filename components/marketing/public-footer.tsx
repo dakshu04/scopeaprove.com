@@ -12,6 +12,8 @@ const groups = [
       { href: "/#features", label: "Features" },
       { href: "/#pricing", label: "Pricing" },
       { href: "/#faq", label: "FAQ" },
+      { href: "/freelance-hourly-rate-calculator", label: "Hourly rate calculator" },
+      { href: "/scope-creep-cost-calculator", label: "Scope creep calculator" },
       { href: "/sign-in", label: "Sign in" },
     ],
   },
