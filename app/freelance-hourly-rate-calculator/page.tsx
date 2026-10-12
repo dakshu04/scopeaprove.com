@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 
 import { FreelanceHourlyRateCalculatorFaq } from "@/components/freelance-hourly-rate-calculator-faq";
-import { FreelanceHourlyRateCalculatorWidget } from "@/components/freelance-hourly-rate-calculator-widget";
+import { FreelanceHourlyRateCalculator } from "@/components/calculators/freelance-hourly-rate-calculator";
 import { PublicFooter } from "@/components/marketing/public-footer";
 import { PublicHeader } from "@/components/marketing/public-header";
 import { absoluteUrl, siteConfig } from "@/config/siteConfig";
@@ -132,7 +132,7 @@ export default function FreelanceHourlyRateCalculatorPage() {
 
       <main id="main-content">
         <section className="relative overflow-hidden border-b border-[#dfe6e1] bg-[radial-gradient(circle_at_85%_10%,#dff3e9_0,transparent_34%),linear-gradient(180deg,#fff_0%,#f6f8f5_100%)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_85%_10%,#1e5745_0,transparent_36%),linear-gradient(180deg,#15231e_0%,#101814_100%)]">
-          <div className="mx-auto max-w-[1180px] px-5 pt-5 sm:px-6 sm:pt-6">
+          <div className="mx-auto max-w-[1240px] px-5 pt-5 sm:px-6 sm:pt-6">
             <nav aria-label="Breadcrumb" className="text-xs text-[#77817c] dark:text-white/45">
               <ol className="flex items-center gap-2">
                 <li>
@@ -145,7 +145,7 @@ export default function FreelanceHourlyRateCalculatorPage() {
               </ol>
             </nav>
           </div>
-          <div className="mx-auto grid max-w-[1180px] gap-10 px-5 pb-12 pt-8 sm:px-6 sm:pb-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:pb-20 lg:pt-10">
+          <div className="mx-auto grid max-w-[1240px] gap-10 px-5 pb-12 pt-8 sm:px-6 sm:pb-16 lg:pb-20 lg:pt-10 xl:grid-cols-[0.62fr_1.38fr] xl:items-center">
             <div className="min-w-0">
               <p className="inline-flex items-center gap-2 rounded-full border border-[#cfe0d8] bg-white/80 px-3 py-1.5 text-xs font-semibold text-[#176b55] shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-[#a9e5cc]">
                 <CheckCircle2 aria-hidden="true" className="size-3.5" /> Free freelance calculator
@@ -170,7 +170,7 @@ export default function FreelanceHourlyRateCalculatorPage() {
                 ))}
               </ul>
             </div>
-            <FreelanceHourlyRateCalculatorWidget />
+            <FreelanceHourlyRateCalculator />
           </div>
         </section>
 
