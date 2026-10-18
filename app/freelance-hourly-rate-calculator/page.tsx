@@ -23,7 +23,7 @@ import {
 const pageTitle = "Free Freelance Hourly Rate Calculator";
 const metadataTitle = "Freelance Hourly Rate Calculator (Free) | ScopeYes";
 const description =
-  "Calculate your freelance hourly rate from income goals, taxes, expenses, time off, and billable hours. Free, private, and instant.";
+  "Use this free freelance hourly rate and pay calculator to price income goals, taxes, expenses, time off, and realistic billable hours.";
 const pageUrl = absoluteUrl("/freelance-hourly-rate-calculator");
 
 const steps = [
@@ -50,6 +50,11 @@ const faqs = [
     question: "How do I calculate my freelance hourly rate?",
     answer:
       "Add annual business expenses to the gross income needed to reach your take-home goal after your tax reserve. Divide that revenue target by the number of hours you can realistically bill each year.",
+  },
+  {
+    question: "Is this also a freelance pay calculator?",
+    answer:
+      "Yes. It works backward from the annual take-home pay you want, then accounts for business expenses, a tax reserve, time off, and non-billable work to calculate the hourly rate and monthly revenue target your freelance business needs.",
   },
   {
     question: "What does billable percentage mean for a freelancer?",
@@ -84,6 +89,8 @@ export function generateMetadata(): Metadata {
     description,
     keywords: [
       "freelance hourly rate calculator",
+      "freelance pay calculator",
+      "freelancer hourly rate calculator",
       "freelancer rate calculator",
       "calculate freelance rate",
       "contractor hourly rate calculator",
@@ -154,8 +161,9 @@ export default function FreelanceHourlyRateCalculatorPage() {
                 Freelance hourly rate calculator
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5f6a65] dark:text-white/65 sm:text-lg sm:leading-8">
-                Find the hourly rate that covers your income goal, taxes,
-                expenses, time off, and the hours clients never see.
+                Use this freelance pay calculator to find the hourly rate that
+                covers your income goal, taxes, expenses, time off, and the hours
+                clients never see.
               </p>
               <ul className="mt-7 space-y-3 text-sm font-medium text-[#46524c] dark:text-white/70">
                 {[
@@ -313,6 +321,38 @@ export default function FreelanceHourlyRateCalculatorPage() {
                 <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-[1040px] px-5 py-14 sm:px-6 sm:py-20">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#176b55] dark:text-[#9be2c4]">
+            Learn the pricing model
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">
+            Freelance rate guides
+          </h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {[
+              {
+                href: "/guides/how-to-calculate-freelance-hourly-rate",
+                title: "How to calculate a freelance hourly rate",
+                text: "Understand the revenue, expenses, tax reserve, and billable-capacity formula behind the calculator.",
+              },
+              {
+                href: "/guides/freelance-hourly-rate-vs-salary",
+                title: "Freelance hourly rate vs salary",
+                text: "See why an employee-equivalent wage does not cover benefits, overhead, unpaid time, or business risk.",
+              },
+            ].map((guide) => (
+              <article className="rounded-2xl border border-[#dfe4e0] bg-white p-6 dark:border-white/10 dark:bg-white/5" key={guide.href}>
+                <h3 className="text-lg font-semibold">{guide.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#68716c] dark:text-white/60">{guide.text}</p>
+                <Link className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#176b55] hover:underline dark:text-[#9be2c4]" href={guide.href}>
+                  Read the guide
+                  <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
+              </article>
+            ))}
           </div>
         </section>
 

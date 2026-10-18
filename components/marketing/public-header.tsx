@@ -12,6 +12,7 @@ const productLinks = [
 ] as const;
 
 const publicLinks = [
+  { href: "/guides", label: "All guides" },
   { href: "/freelance-hourly-rate-calculator", label: "Hourly rate calculator" },
   { href: "/scope-creep-cost-calculator", label: "Scope creep calculator" },
   { href: "/guides/client-asking-for-extra-work", label: "Extra work guide" },
@@ -46,8 +47,8 @@ export function PublicHeader() {
               {item.label}
             </Link>
           ))}
-          <Link className="rounded-md outline-none transition-colors hover:text-[#176b55] focus-visible:ring-2 focus-visible:ring-[#176b55]/50 dark:hover:text-[#baf0da] dark:focus-visible:ring-[#a9e5cc]/60" href="/guides/freelance-scope-of-work-template">
-            Freelancer guide
+          <Link className="rounded-md outline-none transition-colors hover:text-[#176b55] focus-visible:ring-2 focus-visible:ring-[#176b55]/50 dark:hover:text-[#baf0da] dark:focus-visible:ring-[#a9e5cc]/60" href="/guides">
+            Guides
           </Link>
           <Link className="rounded-md outline-none transition-colors hover:text-[#176b55] focus-visible:ring-2 focus-visible:ring-[#176b55]/50 dark:hover:text-[#baf0da] dark:focus-visible:ring-[#a9e5cc]/60" href="/about">
             About

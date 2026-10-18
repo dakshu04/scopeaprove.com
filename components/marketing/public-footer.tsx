@@ -20,6 +20,7 @@ const groups = [
   {
     title: "Explore",
     links: [
+      { href: "/guides", label: "All freelancer guides" },
       { href: "/guides/client-asking-for-extra-work", label: "When clients ask for extra work" },
       { href: "/guides/freelance-scope-of-work-template", label: "Freelance scope of work template" },
       { href: "/guides/client-change-request-template", label: "Free change request template" },

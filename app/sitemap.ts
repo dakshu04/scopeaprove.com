@@ -23,8 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: absoluteUrl("/guides"),
+      lastModified: "2026-10-18",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/freelance-hourly-rate-calculator"),
-      lastModified: "2026-10-11",
+      lastModified: "2026-10-18",
       changeFrequency: "monthly",
       priority: 0.9,
     },
@@ -48,9 +54,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/guides/freelance-scope-of-work-template"),
-      lastModified: "2026-10-09",
+      lastModified: "2026-10-18",
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/guides/how-to-calculate-freelance-hourly-rate"),
+      lastModified: "2026-10-18",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: absoluteUrl("/guides/freelance-hourly-rate-vs-salary"),
+      lastModified: "2026-10-18",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/guides/freelance-scope-of-work-examples"),
+      lastModified: "2026-10-18",
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: absoluteUrl("/security"),

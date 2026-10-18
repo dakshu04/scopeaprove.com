@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     "freelance scope of work template",
     "scope of work for freelancers",
     "freelance project scope template",
+    "freelance scope of work examples",
     "freelance contract scope of work",
     "how to write a scope of work",
     "freelancer scope creep",
@@ -89,7 +90,7 @@ const structuredData = {
       headline: title,
       description,
       datePublished: "2026-10-09",
-      dateModified: "2026-10-09",
+      dateModified: "2026-10-18",
       inLanguage: siteConfig.language,
       mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
       author: {
@@ -114,9 +115,10 @@ const structuredData = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+        { "@type": "ListItem", position: 2, name: "Guides", item: absoluteUrl("/guides") },
         {
           "@type": "ListItem",
-          position: 2,
+          position: 3,
           name: "Freelance scope of work template",
           item: pageUrl,
         },
@@ -268,6 +270,10 @@ Work not listed above requires a written change request showing the added work, 
             </Link>{" "}
             to state the added fee and delivery impact.
           </p>
+          <Link className="mt-5 inline-flex items-center gap-2 font-semibold text-[#176b55] hover:underline" href="/guides/freelance-scope-of-work-examples">
+            See scope of work examples for web design, copywriting, branding, and consulting
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
         </section>
 
         <section className={sectionClass}>

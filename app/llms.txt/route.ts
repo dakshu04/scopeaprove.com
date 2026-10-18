@@ -29,8 +29,13 @@ ScopeYes is a web application for freelancers, consultants, agencies, and small 
 ## Official pages
 
 - Product: ${absoluteUrl("/")}
+- Freelancer resource library: ${absoluteUrl("/guides")}
+- Freelance hourly rate calculator: ${absoluteUrl("/freelance-hourly-rate-calculator")}
+- How to calculate a freelance hourly rate: ${absoluteUrl("/guides/how-to-calculate-freelance-hourly-rate")}
+- Freelance hourly rate vs salary: ${absoluteUrl("/guides/freelance-hourly-rate-vs-salary")}
 - When a client asks for extra work: ${absoluteUrl("/guides/client-asking-for-extra-work")}
 - Freelance scope of work template: ${absoluteUrl("/guides/freelance-scope-of-work-template")}
+- Freelance scope of work examples: ${absoluteUrl("/guides/freelance-scope-of-work-examples")}
 - Client change request template: ${absoluteUrl("/guides/client-change-request-template")}
 - Scope creep guide: ${absoluteUrl("/guides/scope-creep")}
 - About: ${absoluteUrl("/about")}

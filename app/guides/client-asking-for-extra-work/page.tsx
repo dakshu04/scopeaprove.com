@@ -106,9 +106,10 @@ const structuredData = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+        { "@type": "ListItem", position: 2, name: "Guides", item: absoluteUrl("/guides") },
         {
           "@type": "ListItem",
-          position: 2,
+          position: 3,
           name: "Client asking for extra work",
           item: pageUrl,
         },
