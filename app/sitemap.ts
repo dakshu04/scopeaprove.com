@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/freelance-hourly-rate-calculator"),
-      lastModified: "2026-10-18",
+      lastModified: "2026-10-23",
       changeFrequency: "monthly",
       priority: 0.9,
     },
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/guides/freelance-scope-of-work-template"),
-      lastModified: "2026-10-18",
+      lastModified: "2026-10-23",
       changeFrequency: "monthly",
       priority: 0.9,
     },

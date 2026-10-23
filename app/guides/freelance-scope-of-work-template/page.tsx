@@ -3,12 +3,51 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, FileText, ShieldCheck } from "lucide-react";
 
 import { InfoPageShell } from "@/components/marketing/info-page-shell";
+import { ScopeOfWorkTemplateActions } from "@/components/guides/scope-of-work-template-actions";
 import { absoluteUrl, siteConfig } from "@/config/siteConfig";
 
 const pageUrl = absoluteUrl("/guides/freelance-scope-of-work-template");
-const title = "Freelance Scope of Work Template: Define Every Project Clearly";
+const title = "Free Freelance Scope of Work Template";
 const description =
-  "Use this free freelance scope of work template to define deliverables, revisions, deadlines, payment, exclusions, and a clear process for client changes.";
+  "Copy or download a free freelance scope of work template covering deliverables, revisions, deadlines, fees, exclusions, acceptance, and client changes.";
+
+const template = `Project: [Project name]
+Client: [Client name]
+Freelancer: [Your name or business]
+Effective date: [Date]
+
+1. Project objective
+[Describe the business result this project should achieve.]
+
+2. Deliverables
+- [Specific deliverable, format, and quantity]
+- [Specific deliverable, format, and quantity]
+- [Required handoff files or access]
+
+3. Timeline and milestones
+- [Milestone]: [Delivery date]
+- [Milestone]: [Delivery date]
+Final delivery: [Date]
+
+4. Client responsibilities
+[Feedback deadlines, content, access, approvals, and a single decision-maker.]
+
+5. Revisions
+[Number] revision rounds are included. A revision changes an included deliverable; a new deliverable or direction is a scope change.
+
+6. Not included
+- [Excluded service or deliverable]
+- [Ongoing maintenance, extra formats, or third-party costs]
+
+7. Fees and payment schedule
+Total project fee: [Amount and currency]
+Payment schedule: [Deposit and milestone terms]
+
+8. Acceptance
+[Explain how the client reviews and accepts each deliverable.]
+
+9. Scope changes
+Work not listed above requires a written change request showing the added work, price, and schedule impact. The freelancer will begin changed work only after the client approves it.`;
 
 export const metadata: Metadata = {
   title: { absolute: `${title} | ScopeYes` },
@@ -90,7 +129,7 @@ const structuredData = {
       headline: title,
       description,
       datePublished: "2026-10-09",
-      dateModified: "2026-10-18",
+      dateModified: "2026-10-23",
       inLanguage: siteConfig.language,
       mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
       author: {
@@ -161,8 +200,8 @@ export default function FreelanceScopeOfWorkTemplatePage() {
               anyone starts. It defines the result, the boundaries, and what
               happens when the client asks for something new.
             </p>
-            <a className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#176b55] px-4 py-2.5 text-sm font-semibold text-white" href="#copy-template">
-              Copy the free template
+            <a className="mt-5 inline-flex items-center gap-2 font-semibold text-[#176b55] hover:underline" href="#copy-template">
+              Go to the copy-and-download template
               <ArrowRight aria-hidden="true" className="size-4" />
             </a>
           </div>
@@ -174,48 +213,15 @@ export default function FreelanceScopeOfWorkTemplatePage() {
             Replace the bracketed text and make every deliverable measurable.
             Attach the finished scope to your proposal or freelance agreement.
           </p>
+          <div className="mt-6">
+            <ScopeOfWorkTemplateActions template={template} />
+          </div>
           <div className="mt-6 overflow-hidden rounded-2xl border border-[#dcded8] bg-white shadow-[0_14px_38px_rgba(31,49,42,0.06)]">
             <div className="flex items-center gap-2 border-b border-[#e5e6e1] bg-[#f5f6f2] px-5 py-3 text-xs font-semibold text-[#4f534d]">
               <FileText aria-hidden="true" className="size-4 text-[#176b55]" />
               Freelance project scope of work
             </div>
-            <pre className="overflow-x-auto whitespace-pre-wrap p-5 font-sans text-sm leading-7 text-[#454842] sm:p-7">{`Project: [Project name]
-Client: [Client name]
-Freelancer: [Your name or business]
-Effective date: [Date]
-
-1. Project objective
-[Describe the business result this project should achieve.]
-
-2. Deliverables
-- [Specific deliverable, format, and quantity]
-- [Specific deliverable, format, and quantity]
-- [Required handoff files or access]
-
-3. Timeline and milestones
-- [Milestone]: [Delivery date]
-- [Milestone]: [Delivery date]
-Final delivery: [Date]
-
-4. Client responsibilities
-[Feedback deadlines, content, access, approvals, and a single decision-maker.]
-
-5. Revisions
-[Number] revision rounds are included. A revision changes an included deliverable; a new deliverable or direction is a scope change.
-
-6. Not included
-- [Excluded service or deliverable]
-- [Ongoing maintenance, extra formats, or third-party costs]
-
-7. Fees and payment schedule
-Total project fee: [Amount and currency]
-Payment schedule: [Deposit and milestone terms]
-
-8. Acceptance
-[Explain how the client reviews and accepts each deliverable.]
-
-9. Scope changes
-Work not listed above requires a written change request showing the added work, price, and schedule impact. The freelancer will begin changed work only after the client approves it.`}</pre>
+            <pre className="overflow-x-auto whitespace-pre-wrap p-5 font-sans text-sm leading-7 text-[#454842] sm:p-7">{template}</pre>
           </div>
         </section>
 

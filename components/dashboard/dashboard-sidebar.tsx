@@ -7,6 +7,7 @@ import {
   FolderKanban,
   LayoutDashboard,
   Settings,
+  Wrench,
 } from "lucide-react";
 
 import { DashboardPlanCard } from "@/components/dashboard/dashboard-plan-card";
@@ -27,6 +28,11 @@ const navigation = [
     label: "Change Requests",
     href: "/dashboard/change-requests",
     icon: FilePenLine,
+  },
+  {
+    label: "Tools",
+    href: "/dashboard/tools",
+    icon: Wrench,
   },
 ];
 

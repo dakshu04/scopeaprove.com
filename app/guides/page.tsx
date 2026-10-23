@@ -78,7 +78,7 @@ const resources = [
     href: "/freelance-hourly-rate-calculator",
     title: "Freelance hourly rate calculator",
     description:
-      "Calculate a sustainable hourly rate from income goals, business costs, billable time, taxes, and profit.",
+      "Calculate a sustainable hourly rate from income goals, business costs, billable time, taxes, time off, and optional contingency.",
     label: "Free calculator",
     icon: Calculator,
   },

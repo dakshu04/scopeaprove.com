@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Menu,
   Settings,
+  Wrench,
 } from "lucide-react";
 
 import {
@@ -37,6 +38,11 @@ const navigation = [
     label: "Change Requests",
     href: "/dashboard/change-requests",
     icon: FilePenLine,
+  },
+  {
+    label: "Tools",
+    href: "/dashboard/tools",
+    icon: Wrench,
   },
 ];
 

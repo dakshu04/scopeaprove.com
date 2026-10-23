@@ -21,9 +21,9 @@ import {
 } from "@/lib/freelance-hourly-rate-calculator-schema";
 
 const pageTitle = "Free Freelance Hourly Rate Calculator";
-const metadataTitle = "Freelance Hourly Rate Calculator (Free) | ScopeYes";
+const metadataTitle = "Free Freelance Hourly Rate Calculator | ScopeYes";
 const description =
-  "Use this free freelance hourly rate and pay calculator to price income goals, taxes, expenses, time off, and realistic billable hours.";
+  "Calculate your freelance or self-employed hourly rate from take-home income, taxes, expenses, time off, and realistic billable hours. Free, private, and instant.";
 const pageUrl = absoluteUrl("/freelance-hourly-rate-calculator");
 
 const steps = [
@@ -95,6 +95,7 @@ export function generateMetadata(): Metadata {
       "calculate freelance rate",
       "contractor hourly rate calculator",
       "freelance pricing calculator",
+      "self employment hourly rate calculator",
     ],
     alternates: { canonical: pageUrl },
     openGraph: {
@@ -161,7 +162,7 @@ export default function FreelanceHourlyRateCalculatorPage() {
                 Freelance hourly rate calculator
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5f6a65] dark:text-white/65 sm:text-lg sm:leading-8">
-                Use this freelance pay calculator to find the hourly rate that
+                Use this freelance and self-employed pay calculator to find the hourly rate that
                 covers your income goal, taxes, expenses, time off, and the hours
                 clients never see.
               </p>
@@ -169,7 +170,7 @@ export default function FreelanceHourlyRateCalculatorPage() {
                 {[
                   "Built around realistic billable hours",
                   "Includes taxes, overhead, and vacation",
-                  "No signup and nothing uploaded",
+                  "Saved privately in your browser — no signup",
                 ].map((item) => (
                   <li className="flex items-center gap-2.5" key={item}>
                     <CheckCircle2 aria-hidden="true" className="size-4 text-[#238064]" />

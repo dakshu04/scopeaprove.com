@@ -1,11 +1,13 @@
 "use client";
 
-import { useId, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useState, type ReactNode } from "react";
 import {
   Calculator,
   Check,
   Clipboard,
+  Download,
   Info,
+  RotateCcw,
   ShieldCheck,
   Sparkles,
   TrendingUp,
@@ -30,6 +32,8 @@ type CalculatorValues = {
 
 type CopyStatus = "idle" | "copying" | "copied" | "error";
 
+const storageKey = "scopeyes:freelance-rate-plan";
+
 const initialValues: CalculatorValues = {
   annualExpenses: "12000",
   billablePercent: "60",
@@ -41,6 +45,31 @@ const initialValues: CalculatorValues = {
   vacationWeeks: "4",
 };
 
+const currencyCodes = new Set<CurrencyCode>(["USD", "EUR", "GBP", "CAD", "AUD", "INR"]);
+
+function parseSavedPlan(value: string): CalculatorValues | null {
+  const parsed: unknown = JSON.parse(value);
+  if (!parsed || typeof parsed !== "object") {
+    return null;
+  }
+
+  const saved = parsed as Partial<Record<keyof CalculatorValues, unknown>>;
+  const restored = { ...initialValues };
+
+  for (const field of Object.keys(initialValues) as (keyof CalculatorValues)[]) {
+    const savedValue = saved[field];
+    if (field === "currency") {
+      if (typeof savedValue === "string" && currencyCodes.has(savedValue as CurrencyCode)) {
+        restored.currency = savedValue as CurrencyCode;
+      }
+    } else if (typeof savedValue === "string") {
+      restored[field] = savedValue;
+    }
+  }
+
+  return restored;
+}
+
 function parseAmount(value: string) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
@@ -49,6 +78,39 @@ function parseAmount(value: string) {
 export function FreelanceHourlyRateCalculator() {
   const [values, setValues] = useState<CalculatorValues>(initialValues);
   const [copyStatus, setCopyStatus] = useState<CopyStatus>("idle");
+  const [hasLoadedSavedPlan, setHasLoadedSavedPlan] = useState(false);
+
+  useEffect(() => {
+    let savedPlan: CalculatorValues | null = null;
+
+    try {
+      const savedValues = window.localStorage.getItem(storageKey);
+      if (savedValues) {
+        savedPlan = parseSavedPlan(savedValues);
+      }
+    } catch {
+      savedPlan = null;
+    }
+
+    const restoreSavedPlan = window.setTimeout(() => {
+      if (savedPlan) {
+        setValues(savedPlan);
+      }
+      setHasLoadedSavedPlan(true);
+    }, 0);
+
+    return () => window.clearTimeout(restoreSavedPlan);
+  }, []);
+
+  useEffect(() => {
+    if (hasLoadedSavedPlan) {
+      try {
+        window.localStorage.setItem(storageKey, JSON.stringify(values));
+      } catch {
+        // The calculator still works when browser storage is unavailable.
+      }
+    }
+  }, [hasLoadedSavedPlan, values]);
 
   const results = useMemo(
     () =>
@@ -90,25 +152,48 @@ export function FreelanceHourlyRateCalculator() {
     setCopyStatus("idle");
   };
 
-  const copySummary = async () => {
-    setCopyStatus("copying");
-    const lines = [
+  const summary = useMemo(
+    () => [
       "Freelance rate plan",
       `Target hourly rate: ${rateFormatter.format(results.hourlyRate)}/hour`,
+      `Rate with 10% contingency: ${rateFormatter.format(results.hourlyRate * 1.1)}/hour`,
+      `Rate with 20% contingency: ${rateFormatter.format(results.hourlyRate * 1.2)}/hour`,
       `Annual revenue target: ${currencyFormatter.format(results.annualRevenueTarget)}`,
       `Monthly revenue target: ${currencyFormatter.format(results.monthlyRevenueTarget)}`,
       `Planned billable time: ${results.weeklyBillableHours.toFixed(1)} hours/week`,
       `${values.projectHours || "0"}-hour project minimum: ${currencyFormatter.format(results.projectMinimum)}`,
       "Calculated with the free ScopeYes freelance hourly rate calculator.",
-    ];
+    ].join("\n"),
+    [currencyFormatter, rateFormatter, results, values.projectHours],
+  );
+
+  const copySummary = async () => {
+    setCopyStatus("copying");
 
     try {
-      await navigator.clipboard.writeText(lines.join("\n"));
+      await navigator.clipboard.writeText(summary);
       setCopyStatus("copied");
       window.setTimeout(() => setCopyStatus("idle"), 2500);
     } catch {
       setCopyStatus("error");
     }
+  };
+
+  const downloadSummary = () => {
+    const file = new Blob([summary], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(file);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "freelance-rate-plan.txt";
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const resetPlan = () => {
+    setValues(initialValues);
+    setCopyStatus("idle");
   };
 
   return (
@@ -130,10 +215,14 @@ export function FreelanceHourlyRateCalculator() {
             </p>
           </div>
         </div>
-        <span className="hidden items-center gap-1.5 rounded-full border border-[#cee0d7] bg-white/75 px-2.5 py-1 text-[0.66rem] font-semibold text-[#36705f] shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-[#a9e5cc] sm:inline-flex">
-          <span className="size-1.5 rounded-full bg-[#2a9a75] shadow-[0_0_0_3px_rgba(42,154,117,0.12)]" />
-          Live calculation
-        </span>
+        <button
+          className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-[0.68rem] font-semibold text-[#5c6a63] outline-none hover:bg-white/75 hover:text-[#176b55] focus-visible:ring-2 focus-visible:ring-[#176b55]/40 dark:text-white/50 dark:hover:bg-white/5 dark:hover:text-[#a9e5cc]"
+          onClick={resetPlan}
+          type="button"
+        >
+          <RotateCcw aria-hidden="true" className="size-3.5" />
+          Reset
+        </button>
       </div>
 
       <div className="grid min-w-0 gap-1.5 md:grid-cols-[minmax(0,1.15fr)_minmax(17rem,0.85fr)]">
@@ -200,6 +289,16 @@ export function FreelanceHourlyRateCalculator() {
                 value={currencyFormatter.format(results.projectMinimum)}
               />
             </dl>
+
+            <div className="mt-3 rounded-xl border border-white/8 bg-white/[0.045] px-3.5 py-3">
+              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+                Optional contingency for risk
+              </p>
+              <div className="mt-2 flex items-center justify-between gap-3 text-xs">
+                <span className="text-white/55">10% buffer <b className="ml-1 text-white/90">{rateFormatter.format(results.hourlyRate * 1.1)}</b></span>
+                <span className="text-white/55">20% buffer <b className="ml-1 text-white/90">{rateFormatter.format(results.hourlyRate * 1.2)}</b></span>
+              </div>
+            </div>
           </div>
 
           <div className="relative mt-6">
@@ -212,6 +311,14 @@ export function FreelanceHourlyRateCalculator() {
               {copyStatus === "copied" ? <Check aria-hidden="true" className="size-4" /> : <Clipboard aria-hidden="true" className="size-4" />}
               {copyStatus === "copying" ? "Copying…" : copyStatus === "copied" ? "Rate plan copied" : "Copy my rate plan"}
             </button>
+            <button
+              className="mt-2 inline-flex h-10 w-full items-center justify-center gap-2 rounded-[0.8rem] border border-white/15 bg-white/[0.055] px-4 text-xs font-semibold text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              onClick={downloadSummary}
+              type="button"
+            >
+              <Download aria-hidden="true" className="size-3.5" />
+              Download rate plan
+            </button>
             {copyStatus === "error" ? (
               <p className="mt-3 flex items-start justify-center gap-1.5 text-center text-[0.68rem] leading-4 text-red-200" role="alert">
                 <Info aria-hidden="true" className="mt-0.5 size-3 shrink-0" />
@@ -220,7 +327,7 @@ export function FreelanceHourlyRateCalculator() {
             ) : (
               <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[0.68rem] text-white/40">
                 <ShieldCheck aria-hidden="true" className="size-3" />
-                Private calculation · nothing is uploaded
+                Saved only in this browser · nothing is uploaded
               </p>
             )}
           </div>
